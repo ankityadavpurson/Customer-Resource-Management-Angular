@@ -15,13 +15,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent, ForgetDialogComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { BillingComponent } from './components/billing/billing.component';
+import { SearchComponent } from './components/search/search.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ForgetDialogComponent
+    ForgetDialogComponent,
+    InventoryComponent,
+    BillingComponent,
+    SearchComponent,
+    NavComponent
   ],
   entryComponents: [ForgetDialogComponent],
   imports: [

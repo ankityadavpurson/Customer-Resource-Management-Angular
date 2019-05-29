@@ -42,6 +42,32 @@ table {
     padding-bottom: 0pt;
 }
 
+a {
+    text-decoration: none !important;
+    color: black;
+}
+
+.container{
+    padding: 10pt;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.box{
+    display: inline-flex; 
+    border: 2pt solid black;
+    margin: 10pt;
+    padding: 10pt;
+    width: 20%;   
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.box:hover{
+    background-color: black;
+    color: white
+}
+
 .error {
     color: red;
     font-size: 85%;

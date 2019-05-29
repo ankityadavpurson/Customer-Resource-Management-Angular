@@ -1,0 +1,25 @@
+.nav{
+    padding:10pt;
+    font-size: 130%; 
+}
+
+li {
+    display: inline-block;
+    padding: 0pt 15pt;
+    margin: 0pt;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0pt;
+    padding: 0pt;
+}
+
+.active {
+    color: blue;
+}
+
+.logout {
+    float: right;
+    margin-right: 15pt;
+}

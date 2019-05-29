@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { BasicServiceService } from '../../services/basic-service.service'; 
 
-  export interface DialogData {
-    userId: string;
-  }
+export interface DialogData {
+  userId: string;
+}
 
 @Component({
     selector: 'forget-dialog',
@@ -15,14 +15,21 @@ import { BasicServiceService } from '../../services/basic-service.service';
   })
 export class ForgetDialogComponent {
 
+  send = false;
+
   constructor(
     public dialogRef: MatDialogRef<ForgetDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   getPassword(): void {
-    console.log('asdasd');
-    this.dialogRef.close();
+    console.log(this.data);    
+    this.send = true;
+    if(this.data.userId){
+      // Function calling for forget password
+      this.dialogRef.close();
+    }      
   }
+
   cancel() {
     this.dialogRef.close();
   }
@@ -30,7 +37,7 @@ export class ForgetDialogComponent {
 }
 
 @Component({
-    selector: 'app-login',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -45,6 +52,7 @@ export class LoginComponent implements OnInit {
   
   loginForm: FormGroup;
   submitted = false;
+  userId: string;
 
   ngOnInit(): void {
 
@@ -68,17 +76,11 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
-openDialog(): void {
+  openDialog(): void {  
+      const dialogRef = this.dialog.open(ForgetDialogComponent, {
+      width: '50%',
+      data: { userId: this.userId }
+    });
+  }
   
-  const dialogRef = this.dialog.open(ForgetDialogComponent, {
-    width: '50%',
-    data: { userId: this.userId }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed', result);
-    this.userId = result;
-  });
-}
-
 }
