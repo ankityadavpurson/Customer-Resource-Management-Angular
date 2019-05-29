@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Forget Paswword</h1>
+<div mat-dialog-content>
+    <mat-form-field style="width: 65%">
+        <input matInput [(ngModel)]="userid" placeholder="User ID">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="getPassword()">Send Password</button>
+    <button mat-button (click)="cancel()">Cancel</button>
+</div>

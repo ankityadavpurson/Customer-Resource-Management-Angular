@@ -1,0 +1,28 @@
+<div class="loginDiv">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <label>
+      <mat-form-field class="input">
+        <input matInput placeholder="User Id" formControlName="userId">
+      </mat-form-field>
+      <div *ngIf="submitted && loginForm.controls.userId.errors">
+        <span class="error">User Id is required</span>
+      </div>
+    </label>
+
+    <label>
+      <mat-form-field class="input">
+        <input matInput placeholder="Password" formControlName="password">
+      </mat-form-field>
+      <div *ngIf="submitted && loginForm.controls.password.errors">
+        <span class="error">Password is required</span>
+      </div>
+    </label>
+
+    <br><br>
+
+    <input type="submit" value="Login" />
+    <input type="button" (click)="openDialog()" value="Forget Password" />
+
+  </form>
+</div>

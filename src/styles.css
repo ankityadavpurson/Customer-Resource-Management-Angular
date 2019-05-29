@@ -1,0 +1,49 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="text"] {
+    width: 100%;
+}
+
+.button, button, input[type="submit"], input[type="button"] {
+    border: none;
+    padding: 5pt 12pt;
+    margin: 5pt;
+    text-align: center;
+    text-decoration: none;
+    border: 1pt solid black;
+    border-radius: 3pt;
+    cursor: pointer;
+    background-color: white;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.button:hover, button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: black;
+    color: white;
+}
+
+.tableDiv {
+    padding: 5%;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 20pt;
+    padding: 10pt;
+    padding-bottom: 0pt;
+}
+
+.error {
+    color: red;
+    font-size: 85%;
+    font-style: italic; 
+}

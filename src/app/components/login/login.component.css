@@ -1,0 +1,13 @@
+.loginDiv {
+    width: 50%;
+    height: auto;
+    border: 2px solid gray;
+    border-radius: 5pt;
+    margin: auto;
+    margin-top: 20pt;
+    padding: 25pt;
+}
+
+.input {
+    width: 100%;
+}
