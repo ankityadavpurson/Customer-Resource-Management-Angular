@@ -1,0 +1,10 @@
+<div>
+  <ul>
+    <label *ngIf="logged">
+      <li class="other"><a routerLinkActive="active" routerLink="/billing">Billing</a></li>
+      <li class="other"><a routerLinkActive="active" routerLink="/inventory">Inventory</a></li>
+      <li class="other"><a routerLinkActive="active" routerLink="/search">Search</a></li>
+      <li class="other" (click)="logout()"> <a routerLink="">Logout</a> </li>
+    </label>
+  </ul>
+</div>
