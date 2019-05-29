@@ -21,8 +21,12 @@ export class NavComponent implements OnInit, AfterContentChecked, OnDestroy  {
 
   ngOnInit() {
     this.iSubscribe = this.service.currentLogged.subscribe(value => {
-      this.logged = value;
+      this.logged = value;  
     });
+
+    this.logged  =  this.service.storage('session-get', 'token')
+        ? true : false;
+    
   }  
 
   logout() {
