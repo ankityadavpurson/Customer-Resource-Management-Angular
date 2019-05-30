@@ -10,7 +10,7 @@ export interface CustomerDetails {
 
 const CUSTOMER_DATA: CustomerDetails[] = [
   { customerName: 'Deeapk', billId: 'B001', dateOfPurchase: '12/05/2019', emailId: 'deepak@gmial.com', mobileNo: 9867564320 },
-  { customerName: 'Ankit', billId: 'B002', dateOfPurchase: '14/05/2019', emailId: 'ankit@gmial.com', mobileNo: 8975436778 },
+  { customerName: 'Ankit', billId: 'B001', dateOfPurchase: '14/05/2019', emailId: 'ankit@gmial.com', mobileNo: 8975436778 },
   { customerName: 'Abhishek', billId: 'B003', dateOfPurchase: '11/05/2019', emailId: 'abhishek@gmial.com', mobileNo: 9089765435 },
   { customerName: 'Dheeraj', billId: 'B004', dateOfPurchase: '16/05/2019', emailId: 'dhiraj@gmial.com', mobileNo: 9712309875 },
   { customerName: 'Piyush', billId: 'B005', dateOfPurchase: '13/05/2019', emailId: 'piyush@gmial.com', mobileNo: 9086342367 },
@@ -37,13 +37,22 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    console.log(this.searchString);
 
-    CUSTOMER_DATA.map(() => {
+    let array =[];
+    let searchString = this.searchString.toLowerCase( );
+
+    for (let i = 0; i < CUSTOMER_DATA.length; i++) {
+
+      let name=CUSTOMER_DATA[i].customerName.toLowerCase();
+      let billId=CUSTOMER_DATA[i].billId.toLowerCase();
+
+      if(name.match(searchString) || billId.match(searchString)){
+        array.push(CUSTOMER_DATA[i]);
+      }
       
-    });
-
-    this.dataSource = CUSTOMER_DATA;
+      this.dataSource = array;
+    }
+    
   }
 
 }
