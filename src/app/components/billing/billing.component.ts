@@ -9,7 +9,8 @@ export class BillingComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
+
+
 
 }

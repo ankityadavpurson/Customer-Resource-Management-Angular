@@ -1,0 +1,17 @@
+.searchInput {
+    text-align: center;
+}
+
+.tableDiv {
+    padding: 3%;
+}
+
+.table {
+    font-size: 103%;
+    color: black;
+}
+
+.tableHead {
+    color: grey;
+    font-size: 105%;
+}

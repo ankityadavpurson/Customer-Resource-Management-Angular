@@ -1,15 +1,15 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterContentChecked } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { BasicServiceService } from '../../services/basic-service.service'; 
+import { BasicServiceService } from '../../services/basic-service.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit, AfterContentChecked, OnDestroy  {
+export class NavComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   constructor(
     private service: BasicServiceService,
@@ -18,16 +18,17 @@ export class NavComponent implements OnInit, AfterContentChecked, OnDestroy  {
 
   logged = false;
   iSubscribe: Subscription;
+  home = true;
 
   ngOnInit() {
     this.iSubscribe = this.service.currentLogged.subscribe(value => {
-      this.logged = value;  
+      this.logged = value;
     });
 
-    this.logged  =  this.service.storage('session-get', 'token')
-        ? true : false;
-    
-  }  
+    this.logged = this.service.storage('session-get', 'token')
+      ? true : false;
+
+  }
 
   logout() {
     this.logged = false;
@@ -38,6 +39,10 @@ export class NavComponent implements OnInit, AfterContentChecked, OnDestroy  {
 
   ngOnDestroy(): void {
     this.iSubscribe.unsubscribe();
+  }
+
+  ngAfterContentChecked(): void {
+    this.home = (this.router.url === '/home') ? true : false;
   }
 
 }

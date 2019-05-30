@@ -5,7 +5,8 @@ html, body {
 
 body {
     margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: "Helvetica Neue", sans-serif;
 }
 
 input[type="text"] {
@@ -14,11 +15,12 @@ input[type="text"] {
 
 .button, button, input[type="submit"], input[type="button"] {
     border: none;
+    font-size: 105%;
     padding: 5pt 12pt;
     margin: 5pt;
     text-align: center;
     text-decoration: none;
-    border: 1pt solid black;
+    border: 1.5pt solid black;
     border-radius: 3pt;
     cursor: pointer;
     background-color: white;
@@ -47,29 +49,8 @@ a {
     color: black;
 }
 
-.container{
-    padding: 10pt;
-    text-align: center;
-    margin-top: 10%;
-}
-
-.box{
-    display: inline-flex; 
-    border: 2pt solid black;
-    margin: 10pt;
-    padding: 10pt;
-    width: 20%;   
-    transition: 0.4s;
-    cursor: pointer;
-}
-
-.box:hover{
-    background-color: black;
-    color: white
-}
-
 .error {
     color: red;
     font-size: 85%;
-    font-style: italic; 
+    font-style: italic;
 }
