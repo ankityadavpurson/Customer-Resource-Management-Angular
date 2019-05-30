@@ -42,3 +42,30 @@ export const CUSTOMERDATA = [
         pincode: 560090
     }
 ];
+
+export const INVENTORY_DATA = [
+    {
+        id: 'I001',
+        name: 'xyz',
+        quantity: 12,
+        price: 12.90,
+        type: 'stationary',
+        expiryDate: '-'
+    },
+    {
+        id: 'I002',
+        name: 'asz',
+        quantity: 18,
+        price: 15.20,
+        type: 'grocery',
+        expiryDate: '21/12/2029'
+    },
+    {
+        id: 'I003',
+        name: 'sdf',
+        quantity: 21,
+        price: 34.60,
+        type: 'retails',
+        expiryDate: '21/12/2029'
+    }
+];
