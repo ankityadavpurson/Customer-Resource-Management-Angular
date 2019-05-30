@@ -18,56 +18,6 @@ const CUSTOMER_DATA: CustomerDetails[] = [
   { customerName: 'Shubhanshu', billId: 'B006', dateOfPurchase: '10/05/2019', emailId: 'shubhanshu@gmial.com', mobileNo: 9045327865 },
 ];
 
-@Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
-})
-export class SearchComponent implements OnInit {
-
-  constructor(
-    public dialog: MatDialog
-  ) { }
-
-  searchString: string;
-  displayedColumns: string[] = ['customerName', 'billId', 'dateOfPurchase', 'mobileNo', 'emailId', 'button'];
-  dataSource = CUSTOMER_DATA;
-
-  ngOnInit() { }
-
-  search() {
-
-    let array =[];
-    let searchString = this.searchString.toLowerCase( );
-
-    for (let i = 0; i < CUSTOMER_DATA.length; i++) {
-
-      let name=CUSTOMER_DATA[i].customerName.toLowerCase();
-      let billId=CUSTOMER_DATA[i].billId.toLowerCase();
-
-      if(name.match(searchString) || billId.match(searchString)){
-        array.push(CUSTOMER_DATA[i]);
-      }
-      
-      this.dataSource = array;
-    }
-
-  }
-
-  view(id): void {
-  {
-    console.log(id);
-    
-    const dialogRef = this.dialog.open(ViewDialogComponent, {
-        width: '50%',
-        // data: { userId: this.userId }
-      });
-    }
-  }
-
-}
-
-
 
 @Component({
   selector: 'app-view-dialog',
@@ -114,6 +64,55 @@ export class ViewDialogComponent {
 
   cancel() {
     this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
+})
+export class SearchComponent implements OnInit {
+
+  constructor(
+    public dialog: MatDialog
+  ) { }
+
+  searchString: string;
+  displayedColumns: string[] = ['customerName', 'billId', 'dateOfPurchase', 'mobileNo', 'emailId', 'button'];
+  dataSource = CUSTOMER_DATA;
+
+  ngOnInit() { }
+
+  search() {
+
+    let array =[];
+    let searchString = this.searchString.toLowerCase( );
+
+    for (let i = 0; i < CUSTOMER_DATA.length; i++) {
+
+      let name=CUSTOMER_DATA[i].customerName.toLowerCase();
+      let billId=CUSTOMER_DATA[i].billId.toLowerCase();
+
+      if(name.match(searchString) || billId.match(searchString)){
+        array.push(CUSTOMER_DATA[i]);
+      }
+      
+      this.dataSource = array;
+    }
+
+  }
+
+  view(id): void {
+  {
+    console.log(id);
+    
+    const dialogRef = this.dialog.open(ViewDialogComponent, {
+        width: '50%',
+        // data: { userId: this.userId }
+      });
+    }
   }
 
 }
