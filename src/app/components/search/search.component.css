@@ -1,5 +1,6 @@
 .searchInput {
-    text-align: center;
+    text-align: right;
+    margin-right: 5%;
 }
 
 .tableDiv {
@@ -14,4 +15,8 @@
 .tableHead {
     color: grey;
     font-size: 105%;
+}
+
+.viewModal{
+    /* background-color: aqua */
 }

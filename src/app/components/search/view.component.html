@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Customer Deatils</h1>
+<div class="viewModal">
+    <div>
+        <p>
+            <strong>Name : </strong>
+            <span>{{CUSTOMERDATA.name}}</span>
+        </p>
+
+        <p>
+            <strong>Mobile No. : </strong>
+            <span>{{CUSTOMERDATA.mobileNo}}</span>
+        </p>
+
+        <p>
+            <strong>Email : </strong>
+            <span>{{CUSTOMERDATA.email}}</span>
+        </p>
+
+        <p>
+            <strong>Address : </strong>
+            <span>{{CUSTOMERDATA.address}}</span>
+        </p>
+
+        <p>
+            <strong>Pincode : </strong>
+            <span>{{CUSTOMERDATA.pincode}}</span>
+        </p>
+        
+        <p><strong>Bills : </strong></p>
+        <span *ngFor="let bill of CUSTOMERDATA.bill">
+            {{bill.id}}
+        </span><br>
+    </div>
+    <button style="float: right;" (click)="cancel()">Cancel</button>
+</div>

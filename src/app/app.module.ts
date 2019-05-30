@@ -17,7 +17,7 @@ import { LoginComponent, ForgetDialogComponent } from './components/login/login.
 import { HomeComponent } from './components/home/home.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { BillingComponent } from './components/billing/billing.component';
-import { SearchComponent } from './components/search/search.component';
+import { SearchComponent , ViewDialogComponent} from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
@@ -29,9 +29,10 @@ import { NavComponent } from './components/nav/nav.component';
     InventoryComponent,
     BillingComponent,
     SearchComponent,
-    NavComponent
+    NavComponent,
+    ViewDialogComponent
   ],
-  entryComponents: [ForgetDialogComponent],
+  entryComponents: [ForgetDialogComponent, ViewDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
