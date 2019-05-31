@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billing',
@@ -7,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillingComponent implements OnInit {
 
-  constructor() { }
+  billId: string;
+
+  constructor(private router: Router) {
+    const state = this.router.getCurrentNavigation().extras.state;
+    if (state) {
+      console.log(state.billId);
+      this.billId = state.billId;
+    }
+  }
 
   ngOnInit() { }
-
-
 
 }

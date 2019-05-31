@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,7 @@ import { LoginComponent, ForgetDialogComponent } from './components/login/login.
 import { HomeComponent } from './components/home/home.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { BillingComponent } from './components/billing/billing.component';
-import { SearchComponent , ViewDialogComponent} from './components/search/search.component';
+import { SearchComponent, ViewDialogComponent } from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NavComponent } from './components/nav/nav.component';
     MatDialogModule,
     FormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,7 +4,7 @@
 }
 
 a:hover {
-    color: blue
+    color: #7b1fa2;
 }
 
 li {
@@ -20,7 +20,7 @@ ul {
 }
 
 .active {
-    color: blue;
+    color: #7b1fa2;
 }
 
 .logout {
