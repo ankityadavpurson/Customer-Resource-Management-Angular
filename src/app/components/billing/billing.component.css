@@ -23,6 +23,11 @@
     margin-right: 5%;
 }
 
+.billForm {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 .billDiv {
     width: 80%;
     height: auto;
@@ -34,9 +39,7 @@
 }
 
 .input {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 100%;
     font-size: 100%;
 }
 
@@ -51,4 +54,10 @@ table {
 
 .add {
     float: right;
+}
+
+.type {
+    font-size: 80%;
+    font-weight: 500;
+    color: #7b1fa2;
 }

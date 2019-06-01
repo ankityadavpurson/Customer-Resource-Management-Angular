@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 
 import { INVENTORY_DATA } from '../../../assets/constant';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export interface Inventory { id: string; }
 
@@ -23,23 +23,61 @@ export class InventoryDialogComponent implements OnInit {
   inventoryForm: FormGroup;
 
   ngOnInit() {
-
     this.inventoryId = this.data.id;
 
-    const { name, quantity, price, type, expiryDate } = INVENTORY_DATA[2];
-
     this.inventoryForm = this.formBuilder.group({
-      name: [this.inventoryId ? name : ''],
-      quantity: [this.inventoryId ? quantity : ''],
-      price: [this.inventoryId ? price : ''],
-      type: [this.inventoryId ? type : ''],
-      expiryDate: this.inventoryId ? expiryDate : ['']
+      name: ['', Validators.required],
+      quantity: ['', Validators.required],
+      price: ['', Validators.required],
+      type: ['', Validators.required],
+      expiryDate: ['', Validators.required]
     });
 
+    for (const inventory of INVENTORY_DATA) {
+      if (inventory.id === this.inventoryId) {
+        const { name, quantity, price, type, expiryDate } = inventory;
+        this.inventoryForm.patchValue({
+          name: this.inventoryId ? name : '',
+          quantity: this.inventoryId ? quantity : '',
+          price: this.inventoryId ? price : '',
+          type: this.inventoryId ? type : '',
+          expiryDate: this.inventoryId ? expiryDate : '',
+        });
+      }
+    }
   }
 
   itemFunction() {
-    console.log(this.inventoryId ? 'Update Item' : 'Add Item');
+    if (this.inventoryId) {
+
+      INVENTORY_DATA.forEach(inventory => {
+        if (inventory.id === this.inventoryId) {
+          const { value } = this.inventoryForm;
+          inventory.name = value.name;
+          inventory.quantity = value.quantity;
+          inventory.price = value.price;
+          inventory.type = value.type;
+          inventory.expiryDate = value.expiryDate;
+        }
+      });
+
+      this.dialogRef.close(INVENTORY_DATA);
+
+    } else {
+      const { value } = this.inventoryForm;
+      const item = {
+        id: 'I007',
+        name: value.name,
+        quantity: value.quantity,
+        price: value.price,
+        type: value.type,
+        expiryDate: value.expiryDate,
+        discount: 0,
+      };
+
+      INVENTORY_DATA.push(item);
+      this.dialogRef.close(INVENTORY_DATA);
+    }
   }
 
   cancel() {
@@ -55,7 +93,8 @@ export class InventoryDialogComponent implements OnInit {
 export class InventoryComponent implements OnInit {
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   displayedColumns: string[] = ['id', 'name', 'quantity', 'price', 'type', 'expiryDate', 'edit'];
@@ -80,15 +119,23 @@ export class InventoryComponent implements OnInit {
   }
 
   editInventory(id) {
-    console.log(id);
-    this.dialog.open(InventoryDialogComponent, {
+    const dialogRef = this.dialog.open(InventoryDialogComponent, {
       width: '80%', data: { id }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.snackBar.open('Item Updated', '', { duration: 2000 });
     });
   }
 
   addNewItem() {
-    this.dialog.open(InventoryDialogComponent, {
+    const dialogRef = this.dialog.open(InventoryDialogComponent, {
       width: '80%', data: { id: null }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.snackBar.open('Item Added', '', { duration: 2000 });
+      this.inventoryData = [...res];
     });
   }
 

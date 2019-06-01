@@ -1,7 +1,9 @@
 <h1 mat-dialog-title>Inventory Deatils</h1>
 <mat-dialog-content>
     <div>
-        <p *ngIf="inventoryId" class="inventoryId">{{inventoryId}}</p>
+        <span *ngIf="inventoryId" class="inventoryId">
+            Item Id : {{inventoryId}}
+        </span>
         <form [formGroup]="inventoryForm">
             <table>
                 <tr>

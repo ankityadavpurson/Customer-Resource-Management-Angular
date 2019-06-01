@@ -1,4 +1,9 @@
 .addSearchArea {
-    margin-top: 2%;    
-    margin-left: 4%;    
+    margin-top: 2%;
+    margin-left: 4%;
+}
+
+.inventoryId {
+    margin-left: 2%;
+    font-weight: bold;
 }

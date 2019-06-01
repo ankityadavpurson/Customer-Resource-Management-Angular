@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { LOGINDATA } from 'src/assets/constant';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +14,15 @@ export class BasicServiceService {
   currentLogged = this.logged.asObservable();
   changeLogged = (value: boolean) => this.logged.next(value);
 
+  login(userdata) {
+    for (const user of LOGINDATA) {
+      const { userId, password } = userdata;
+      if (user.userId.match(userId) && user.pass.match(password)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   storage = (typeGetSet: 'local-get' | 'local-set' | 'session-get' | 'session-set', key: string, value?: any) => {
 

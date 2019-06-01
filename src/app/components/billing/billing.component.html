@@ -1,25 +1,43 @@
 <p *ngIf="billId">Bill No. : {{billId}}</p>
 
 <div class="billDiv">
-    <form class="billForm">
+    <form class="billForm" [formGroup]="billForm">
+
         <mat-form-field class="input">
-            <input type="number" matInput placeholder="Customer Mobile Number">
+            <input type="number" matInput placeholder="Customer Mobile Number" formControlName="mobileNo"
+                (change)="findUser()" (keyup)="findUser()">
         </mat-form-field>
-        <!--  <span class="error">*Customer Mobile Number is required</span> -->
+        <div *ngIf="added && billForm.controls.mobileNo.invalid">
+            <span class="error">*Customer Mobile Number is required</span>
+        </div>
+
         <br>
         <mat-form-field class="input">
-            <input matInput placeholder="Name">
+            <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
-        <!-- <span class="error">*Name is required</span> -->
+        <div *ngIf="added && billForm.controls.name.invalid">
+            <span class="error">*Name is required</span>
+        </div>
+
         <br>
         <mat-form-field class="input">
-            <input matInput placeholder="Type">
+            <span class="type">Type</span>
+            <mat-select formControlName="type">
+                <mat-option value="guest">Guest</mat-option>
+                <mat-option value="primary">Primary</mat-option>
+            </mat-select>
         </mat-form-field>
+
         <br>
         <mat-form-field class="input">
-            <input matInput placeholder="Email">
+            <input matInput placeholder="Email" formControlName="email"
+                pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
         </mat-form-field>
-        <!-- <span class="error">*Email is required</span> -->
+        <div *ngIf="added && billForm.controls.email.invalid">
+            <span class="error">*Email is required</span>
+        </div>
+        <br>
+
     </form>
 
     <div class="addItem">
@@ -27,7 +45,7 @@
             <tr>
                 <td>Item ID</td>
                 <td>Item Name </td>
-                <td>Price</td>
+                <td>Price/Item</td>
                 <td>Quantity</td>
                 <td>Total Price</td>
             </tr>
@@ -46,7 +64,7 @@
         </table>
 
     </div>
-    <div *ngIf="added">
+    <div *ngIf="added && billForm.valid">
         <div class="tableDiv">
 
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
@@ -88,7 +106,7 @@
         </div>
         <br>
         <div class="generatebill">
-            <button mat-raised-button>Generate Bill</button>
+            <button mat-raised-button (click)="generateBill()">Generate Bill</button>
         </div>
     </div>
 </div>

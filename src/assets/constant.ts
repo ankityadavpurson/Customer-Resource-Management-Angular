@@ -36,43 +36,87 @@ export const CUSTOMERDATA = [
                 total: 99
             }
         ],
-        mobileNo: 9874563210,
+        mobileNo: 9876543210,
         email: 'Piyu@kota.com',
         address: 'Room No.41,NMH Layout,Bhoomika Colony,Bhoomika Colony,Kirloskar,ChickBanavara',
         pincode: 560090
+    },
+    {
+        id: 32133,
+        name: 'Deepak',
+        primary: false,
+        bill: [
+            {
+                id: 'B001',
+                dateOfPurchase: '2019/05/29',
+                discount: '50%',
+                items: ['I001', 'I002', 'I003'],
+                total: 100
+            }
+        ],
+        mobileNo: 9089786756,
+        email: 'deepak@gmail.com',
+        address: 'House No. 123 Aurimore, Anpara, Sonebhadra',
+        pincode: 231225
     }
 ];
 
-export const INVENTORY_DATA = [
+export let INVENTORY_DATA = [
     {
         id: 'I001',
-        name: 'xyz',
+        name: 'pencil',
         quantity: 12,
         price: 12.90,
         type: 'stationary',
-        expiryDate: '-'
+        expiryDate: '-',
+        discount: 0
     },
     {
         id: 'I002',
-        name: 'asz',
+        name: 'bicuit',
         quantity: 18,
         price: 15.20,
         type: 'grocery',
-        expiryDate: '21/12/2029'
+        expiryDate: '21/12/2029',
+        discount: 10
     },
     {
         id: 'I003',
-        name: 'sdf',
+        name: 'pencile-box',
         quantity: 21,
         price: 34.60,
-        type: 'retails',
-        expiryDate: '21/12/2029'
+        type: 'stationary',
+        expiryDate: '21/12/2029',
+        discount: 0
+    },
+    {
+        id: 'I004',
+        name: 'pen',
+        quantity: 12,
+        price: 16.90,
+        type: 'stationary',
+        expiryDate: '-',
+        discount: 0
+    },
+    {
+        id: 'I005',
+        name: 'tea',
+        quantity: 18,
+        price: 30.20,
+        type: 'grocery',
+        expiryDate: '21/12/2029',
+        discount: 10
+    },
+    {
+        id: 'I006',
+        name: 'book',
+        quantity: 21,
+        price: 120.60,
+        type: 'stationary',
+        expiryDate: '21/12/2029',
+        discount: 0
     }
 ];
-
-
-// export var ELEMENT_DATA=[];
-
 
 export const ELEMENT_DATA = [
     {
@@ -118,4 +162,10 @@ export const ELEMENT_DATA = [
         totalprice: 100
     }
 
-]
+];
+
+export const LOGINDATA = [
+    { userId: '12345', pass: '12345' },
+    { userId: 'admin', pass: 'admin' },
+    { userId: 'deepak', pass: '12345' },
+];

@@ -1,9 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BasicServiceService } from '../../services/basic-service.service';
+import { LOGINDATA } from 'src/assets/constant';
 
 export interface DialogData {
   userId: string;
@@ -20,7 +22,8 @@ export class ForgetDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ForgetDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private snackBar: MatSnackBar) { }
 
   getPassword(): void {
     console.log(this.data);
@@ -28,6 +31,10 @@ export class ForgetDialogComponent {
     if (this.data.userId) {
       // Function calling for forget password
       this.dialogRef.close();
+      this.snackBar.open(
+        'Email is send to your registered email, with password.', '',
+        { duration: 3000 }
+      );
     }
   }
 
@@ -48,7 +55,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private service: BasicServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   loginForm: FormGroup;
@@ -70,15 +78,25 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    let found = false;
     if (this.loginForm.invalid) { return; }
-    const token = '12312323123jk12h31kj23h1k23j12k3j12h3kj3h2k3213k12j3h1k2j3h';
-    this.service.storage('session-set', 'token', token);
-    this.service.changeLogged(true);
-    this.router.navigate(['home']);
+
+    found = this.service.login(this.loginForm.value);
+
+    if (found) {
+      this.snackBar.open('Loading ...', '', { duration: 500 });
+      const token = '12312323123jk12h31kj23h1k23j12k3j12h3kj3h2k3213k12j3h1k2j3h';
+      this.service.storage('session-set', 'token', token);
+      this.service.changeLogged(true);
+      this.router.navigate(['home']);
+    } else {
+      this.snackBar.open('Invalid Credential', '', { duration: 2000 });
+    }
+
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ForgetDialogComponent, {
+  openDialog() {
+    this.dialog.open(ForgetDialogComponent, {
       width: '50%',
       data: { userId: this.userId }
     });
