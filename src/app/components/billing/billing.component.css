@@ -12,3 +12,42 @@
     height: 10pt;
     width: 100pt;
 }
+
+.generatebill{
+    text-align:center;
+}
+
+.grandtotal{
+    text-align:right;
+    margin-right: 5%;
+}
+
+
+.loginDiv {
+    width: 80%;
+    height: auto;
+    border: 2px solid black;
+    margin: auto;
+    margin-top: 5%;
+    padding: 10pt;
+    font-size: 100%;
+}
+
+.input {
+    width: 40%;
+    margin-left: 70pt;
+    font-size: 100%;
+}
+
+.addItem{
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+table{
+    margin-bottom: 0;
+}
+
+.add{
+    float:right;
+}

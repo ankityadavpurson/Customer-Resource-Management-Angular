@@ -37,12 +37,11 @@ export class NavComponent implements OnInit, OnDestroy, AfterContentChecked {
     this.router.navigate(['']);
   }
 
-  ngOnDestroy(): void {
-    this.iSubscribe.unsubscribe();
-  }
-
   ngAfterContentChecked(): void {
     this.home = (this.router.url === '/home') ? true : false;
   }
 
+  ngOnDestroy(): void {
+    this.iSubscribe.unsubscribe();
+  }
 }
