@@ -1,9 +1,15 @@
 <div>
 
-  <div class="searchInput">
-    <mat-form-field>
-      <input matInput [(ngModel)]="searchString" (keyup)="search()" placeholder=" Search ...">
-    </mat-form-field>
+  <div class="addSearchArea">
+    <span>
+      <button (click)="addNewItem()">Add New Item</button>
+    </span>
+
+    <span style="float: right" class="searchInput">
+      <mat-form-field>
+        <input matInput [(ngModel)]="searchString" (keyup)="search()" placeholder=" Search ...">
+      </mat-form-field>
+    </span>
   </div>
 
   <div class="tableDiv">
