@@ -27,8 +27,8 @@ export class BillingComponent implements OnInit {
   itemid: string;
   name: string;
   price: number;
-  quantity: number;
-  totalprice:number;
+  quantity = 1;;
+  totalprice: number;
 
   constructor(private router: Router) {
   const state = this.router.getCurrentNavigation().extras.state;
@@ -40,12 +40,7 @@ export class BillingComponent implements OnInit {
 
   ngAfterContentChecked(): void{}
 
-  ngOnInit() { 
-    for (const i of ELEMENT_DATA) {
-      this.total+=i.totalprice;
-        console.log(this.total);        
-    }
-  }
+  ngOnInit() { }
 
   setItem(){
     console.log(this.itemid);
@@ -58,27 +53,30 @@ export class BillingComponent implements OnInit {
       this.name = name;
       this.price = price;
     }
+
+    this.totalprice = parseFloat((this.quantity * this.price).toFixed(2));
+
   }
 
   setPrice(){    
-    this.totalprice =  this.quantity * this.price;
+    this.totalprice = parseFloat((this.quantity * this.price).toFixed(2));
   }
 
   addItemtolist(){
 
     let bill = {
-      itemid:'weqwe',
-      name:'qweqw',
-      price:654,
-      quantity:65,
-      totalprice:654
+      itemid: this.itemid,
+      name: this.name,
+      price: this.price,
+      quantity: this.quantity,
+      totalprice: this.totalprice
     };
+
+    this.total += parseFloat((bill.totalprice).toFixed(2));
 
     const array = this.dataSource;
     array.push(bill);
-
     this.dataSource = [...array];
-   console.log(this.dataSource);
    
   }
 }
