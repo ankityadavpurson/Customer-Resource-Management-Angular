@@ -1,1 +1,89 @@
 <p *ngIf="billId">Bill No. : {{billId}}</p>
+
+<div class="loginDiv">
+    <form>
+        <mat-form-field class="input">
+            <input matInput placeholder="Customer Mobile Number">
+        </mat-form-field><br>
+        <!--  <span class="error">*Customer Mobile Number is required</span> -->
+        <br>
+        <mat-form-field class="input">
+            <input matInput placeholder="Name">
+        </mat-form-field><br>
+        <!-- <span class="error">*Name is required</span> -->
+        <br>
+        <mat-form-field class="input">
+            <input matInput placeholder="Type">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input">
+            <input matInput placeholder="Email">
+        </mat-form-field><br>
+        <!-- <span class="error">*Email is required</span> -->
+    </form>
+
+    <div class="addItem">
+        <table cellpadding="5">
+            <tr>
+                <td>Item ID</td>
+                <td>Item Name </td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total Price</td>
+            </tr>
+            <tr>
+                <td><input (keyup)="setItem()" [(ngModel)]="itemid" type="text"></td>
+                <td><input [(ngModel)]="name" type="text"></td>
+                <td><input [(ngModel)]="price" type="text"></td>
+                <td><input [(ngModel)]="quantity" min="1" type="number" (keyup)="setPrice()"></td>
+                <td><input [(ngModel)]="totalprice" type="number" disabled></td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <input type="button" value="Add" class="add" (click)="addItemtolist()">
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="tableDiv">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Item No Column -->
+            <ng-container matColumnDef="itemid">
+                <mat-header-cell *matHeaderCellDef> Item ID </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.itemid}} </mat-cell>
+            </ng-container>
+            <!-- Item Name Column -->
+            <ng-container matColumnDef="itemname">
+                <mat-header-cell *matHeaderCellDef> Item Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.itemname}} </mat-cell>
+            </ng-container>
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+            </ng-container>
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="quantity">
+                <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+            </ng-container>
+            <!-- Total Price Column -->
+            <ng-container matColumnDef="totalprice">
+                <mat-header-cell *matHeaderCellDef> Total Price </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.totalprice}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+    <br>
+    <div class="grandtotal">
+        <span>Grand Total :{{total}} </span>
+    </div>
+    <br>
+    <div class="generatebill">
+        <button mat-raised-button>Generate Bill</button>
+    </div>
+</div>

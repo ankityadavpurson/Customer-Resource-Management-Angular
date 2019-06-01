@@ -69,3 +69,45 @@ export const INVENTORY_DATA = [
         expiryDate: '21/12/2029'
     }
 ];
+export var ELEMENT_DATA=[];
+
+
+/* export const ELEMENT_DATA= [
+    {
+    itemid: "I001", 
+    itemname: 'Pen',
+    price: 10.99, 
+    quantity: 9,
+    totalprice:100
+    },
+    {itemid: "I002", 
+    itemname: 'Pencil', 
+    price: 4.99, 
+    quantity: 10,
+    totalprice:100
+    },
+    {itemid: "I003", 
+    itemname: 'Bread', 
+    price: 24.99, 
+    quantity: 5,
+    totalprice:100
+    },
+    {itemid: "I004", 
+    itemname: 'Bread', 
+    price: 24.99, 
+    quantity: 5,
+    totalprice:100
+    },
+    {itemid: "I005", 
+    itemname: 'Bread', 
+    price: 24.99, 
+    quantity: 5,
+    totalprice:100
+    },{itemid: "I006", 
+    itemname: 'Bread', 
+    price: 24.99, 
+    quantity: 5,
+    totalprice:100
+    }
+    
+  ]; */

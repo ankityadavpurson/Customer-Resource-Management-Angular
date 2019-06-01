@@ -16,7 +16,7 @@ input[type="text"] {
 .button, button, input[type="submit"], input[type="button"] {
     border: none;
     font-size: 105%;
-    padding: 5pt 12pt;
+    padding: 3pt 12pt;
     margin: 5pt;
     text-align: center;
     text-decoration: none;
@@ -58,4 +58,34 @@ a {
 .primary {
     color: green;
     margin-left: 2%;
+}
+
+.searchInput {
+    text-align: right;
+    margin-right: 5%;
+}
+
+.tableDiv {
+    padding: 3%;
+}
+
+.table {
+    font-size: 103%;
+    color: black;
+}
+
+.tableHead {
+    color: grey;
+    font-size: 105%;
+    background-color: white;
+}
+
+.trHover {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.trHover:hover {
+    background-color: rgb(228, 228, 228);
+    cursor: pointer;
 }

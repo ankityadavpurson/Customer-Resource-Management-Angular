@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Material imports
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
@@ -16,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent, ForgetDialogComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { InventoryComponent } from './components/inventory/inventory.component';
+import { InventoryComponent, InventoryDialogComponent } from './components/inventory/inventory.component';
 import { BillingComponent } from './components/billing/billing.component';
 import { SearchComponent, ViewDialogComponent } from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -31,9 +30,14 @@ import { NavComponent } from './components/nav/nav.component';
     BillingComponent,
     SearchComponent,
     NavComponent,
-    ViewDialogComponent
+    ViewDialogComponent,
+    InventoryDialogComponent
   ],
-  entryComponents: [ForgetDialogComponent, ViewDialogComponent],
+  entryComponents: [
+    ForgetDialogComponent,
+    ViewDialogComponent,
+    InventoryDialogComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
