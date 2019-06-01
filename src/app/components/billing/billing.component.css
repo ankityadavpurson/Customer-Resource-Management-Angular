@@ -1,10 +1,10 @@
-.billing{
+.billing {
     padding: 10pt;
     text-align: center;
     margin-top: 10%;
 }
 
-.box{
+.box {
     display: inline-block;
     border: 2pt solid black;
     margin: 10pt;
@@ -13,17 +13,17 @@
     width: 100pt;
 }
 
-.generatebill{
-    text-align:center;
+.generatebill {
+    text-align: center;
 }
 
-.grandtotal{
-    text-align:right;
+.grandtotal {
+    text-align: right;
+    font-size: 120%;
     margin-right: 5%;
 }
 
-
-.loginDiv {
+.billDiv {
     width: 80%;
     height: auto;
     border: 2px solid black;
@@ -34,20 +34,21 @@
 }
 
 .input {
-    width: 40%;
-    margin-left: 70pt;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
     font-size: 100%;
 }
 
-.addItem{
+.addItem {
     margin-left: 3%;
     margin-right: 3%;
 }
 
-table{
+table {
     margin-bottom: 0;
 }
 
-.add{
-    float:right;
+.add {
+    float: right;
 }
