@@ -5,7 +5,8 @@ html, body {
 
 body {
     margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: "Helvetica Neue", sans-serif;
 }
 
 input[type="text"] {
@@ -14,11 +15,12 @@ input[type="text"] {
 
 .button, button, input[type="submit"], input[type="button"] {
     border: none;
-    padding: 5pt 12pt;
+    font-size: 105%;
+    padding: 3pt 12pt;
     margin: 5pt;
     text-align: center;
     text-decoration: none;
-    border: 1pt solid black;
+    border: 1.5pt solid black;
     border-radius: 3pt;
     cursor: pointer;
     background-color: white;
@@ -42,8 +44,48 @@ table {
     padding-bottom: 0pt;
 }
 
+a {
+    text-decoration: none !important;
+    color: black;
+}
+
 .error {
     color: red;
     font-size: 85%;
-    font-style: italic; 
+    font-style: italic;
+}
+
+.primary {
+    color: green;
+    margin-left: 2%;
+}
+
+.searchInput {
+    text-align: right;
+    margin-right: 5%;
+}
+
+.tableDiv {
+    padding: 3%;
+}
+
+.table {
+    font-size: 103%;
+    color: black;
+}
+
+.tableHead {
+    color: grey;
+    font-size: 105%;
+    background-color: white;
+}
+
+.trHover {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.trHover:hover {
+    background-color: rgb(228, 228, 228);
+    cursor: pointer;
 }

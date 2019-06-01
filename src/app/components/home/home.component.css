@@ -1,0 +1,23 @@
+.container {
+    padding: 10pt;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.box {
+    display: inline-flex;
+    text-align: center;
+    border: 2pt solid black;
+    margin: 20pt;
+    padding: 25pt;
+    width: 20%;
+    height: 50pt;
+    transition: 0.4s;
+    cursor: pointer;
+    font-size: 130%;
+}
+
+.box:hover {
+    background-color: black;
+    color: white
+}

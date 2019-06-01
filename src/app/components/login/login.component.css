@@ -1,13 +1,24 @@
 .loginDiv {
     width: 50%;
     height: auto;
-    border: 2px solid gray;
-    border-radius: 5pt;
+    border: 2px solid black;
     margin: auto;
-    margin-top: 20pt;
+    margin-top: 9%;
     padding: 25pt;
+    font-size: 120%;
 }
 
 .input {
     width: 100%;
+}
+
+.forgetModal {
+    padding: 5%;
+    font-size: 120%;
+}
+
+.message {
+    float: right;
+    margin-top: 5%;
+    font-size: 70%;
 }

@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Inventory Deatils</h1>
+<mat-dialog-content>
+    <div>
+        <p *ngIf="inventoryId" class="inventoryId">{{inventoryId}}</p>
+        <form [formGroup]="inventoryForm">
+            <table>
+                <tr>
+                    <td> Item Name</td>
+                    <td><input type="text" formControlName="name"></td>
+                </tr>
+                <tr>
+                    <td> Quantity</td>
+                    <td><input type="text" formControlName="quantity"></td>
+                </tr>
+                <tr>
+                    <td> Price</td>
+                    <td><input type="text" formControlName="price"></td>
+                </tr>
+                <tr>
+                    <td> Type</td>
+                    <td><input type="text" formControlName="type"></td>
+                </tr>
+                <tr>
+                    <td> Expiry date</td>
+                    <td><input type="text" formControlName="expiryDate"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-content>
+    <button style="margin-top: 5%" (click)="itemFunction()">
+        {{inventoryId ? 'Update Item' : 'Add Item'}}
+    </button>
+    <button style="float: right; margin-top: 5%" (click)="cancel()">Cancel</button>
+</mat-dialog-content>

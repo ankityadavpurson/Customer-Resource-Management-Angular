@@ -1,0 +1,29 @@
+.nav {
+    padding: 10pt;
+    font-size: 120%;
+}
+
+a:hover {
+    color: #7b1fa2;
+}
+
+li {
+    display: inline-block;
+    padding: 0pt 15pt;
+    margin: 0pt;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0pt;
+    padding: 0pt;
+}
+
+.active {
+    color: #7b1fa2;
+}
+
+.logout {
+    float: right;
+    margin-right: 15pt;
+}
