@@ -1,13 +1,15 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ELEMENT_DATA,INVENTORY_DATA } from '../../../assets/constant';
+
+import { ELEMENT_DATA, INVENTORY_DATA } from '../../../assets/constant';
 import { CUSTOMERDATA} from '../../../assets/constant';
-export interface billingdetails {
-  itemid: string;
-  itemname: string;
-  price: number;
-  quantity: number;
-  totalprice:number;
+
+export interface BillingDetails {
+  itemid?: string;
+  name?: string;
+  price?: number;
+  quantity?: number;
+  totalprice?:number;
 }
 
 @Component({
@@ -15,18 +17,17 @@ export interface billingdetails {
   templateUrl: './billing.component.html',
   styleUrls: ['./billing.component.css']
 })
-export class BillingComponent implements OnInit, AfterContentChecked {
+export class BillingComponent implements OnInit {
 
-  displayedColumns: string[] = ['itemid', 'itemname', 'price', 'quantity','totalprice'];
-  dataSource: billingdetails = [];
-  array=[];
-  total=0;
-  billId: string;
+  displayedColumns: string[] = ['itemid', 'name', 'price', 'quantity','totalprice'];
+  dataSource: BillingDetails[]=[];
+  billId:string;
+  total = 0;
 
-  itemid:sreing;
-  name:string;
-  price:string;
-  quantity = 1;
+  itemid: string;
+  name: string;
+  price: number;
+  quantity: number;
   totalprice:number;
 
   constructor(private router: Router) {
@@ -64,18 +65,20 @@ export class BillingComponent implements OnInit, AfterContentChecked {
   }
 
   addItemtolist(){
-    let billing= {
-      itemid: this.itemid,
-      itemname: this.name,
-      price: this.price,
-      quantity: this.quantity,
-      totalprice: this.totalprice
-    }
-    
-    
-    console.log(this.array);
-    // ELEMENT_DATA.push(billingdetail);
-    this.array.push(billing);
-    this.dataSource = this.array;
+
+    let bill = {
+      itemid:'weqwe',
+      name:'qweqw',
+      price:654,
+      quantity:65,
+      totalprice:654
+    };
+
+    const array = this.dataSource;
+    array.push(bill);
+
+    this.dataSource = [...array];
+   console.log(this.dataSource);
+   
   }
 }

@@ -69,45 +69,53 @@ export const INVENTORY_DATA = [
         expiryDate: '21/12/2029'
     }
 ];
-export var ELEMENT_DATA=[];
 
 
-/* export const ELEMENT_DATA= [
+// export var ELEMENT_DATA=[];
+
+
+ export const ELEMENT_DATA= [
     {
-    itemid: "I001", 
-    itemname: 'Pen',
-    price: 10.99, 
-    quantity: 9,
-    totalprice:100
+        itemid: "I001", 
+        name: 'Pen',
+        price: 10.99, 
+        quantity: 9,
+        totalprice:100
     },
-    {itemid: "I002", 
-    itemname: 'Pencil', 
-    price: 4.99, 
-    quantity: 10,
-    totalprice:100
+    {
+        itemid: "I002", 
+        name: 'Pencil', 
+        price: 4.99, 
+        quantity: 10,
+        totalprice:100
     },
-    {itemid: "I003", 
-    itemname: 'Bread', 
-    price: 24.99, 
-    quantity: 5,
-    totalprice:100
+    {
+        itemid: "I003", 
+        name: 'Bread', 
+        price: 24.99, 
+        quantity: 5,
+        totalprice:100
     },
-    {itemid: "I004", 
-    itemname: 'Bread', 
-    price: 24.99, 
-    quantity: 5,
-    totalprice:100
+    {
+        itemid: "I004", 
+        name: 'Bread', 
+        price: 24.99, 
+        quantity: 5,
+        totalprice:100
     },
-    {itemid: "I005", 
-    itemname: 'Bread', 
-    price: 24.99, 
-    quantity: 5,
-    totalprice:100
-    },{itemid: "I006", 
-    itemname: 'Bread', 
-    price: 24.99, 
-    quantity: 5,
-    totalprice:100
+    {
+        itemid: "I005", 
+        name: 'Bread', 
+        price: 24.99, 
+        quantity: 5,
+        totalprice:100
+    },
+    {
+        itemid: "I006", 
+        name: 'Bread', 
+        price: 24.99, 
+        quantity: 5,
+        totalprice:100
     }
     
-  ]; */
+  ]; 
