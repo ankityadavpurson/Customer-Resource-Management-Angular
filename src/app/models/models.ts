@@ -21,3 +21,53 @@ export interface Bill {
     discount?: number;
     grandTotal: number;
 }
+
+// Interfaces for app
+
+export interface CustomerData {
+    id: string;
+    mobileNo: number;
+    name: string;
+    email: string;
+    customerType: CustomerType;
+    address?: string;
+    pincode?: number;
+    bills: BillData[];
+}
+
+enum CustomerType {
+    'Guest',
+    'Primary'
+}
+
+export interface BillData {
+    id: string;
+    mobileNo?: number;
+    name?: string;
+    email?: string;
+    dateOfPurchase: Date;
+    discount: number;
+    itemsPurchase: ItemsPurchased[];
+}
+
+export interface ItemsPurchased {
+    id: string;
+    quantity: number;
+    price: number;
+    discount: number;
+}
+
+export interface InventoryData {
+    id: string;
+    name: string;
+    quantity: number;
+    price: number;
+    itemIype: ItemIype;
+    discount: number;
+    expiryDate?: Date;
+}
+
+enum ItemIype {
+    'Stationary',
+    'Grocery'
+}

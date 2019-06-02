@@ -21,9 +21,8 @@ export class ViewDialogComponent {
   billSource = CUSTOMERDATA[0].bill;
 
   selectRow(row) {
-    console.log(row);
     this.router.navigate(['billing'], {
-      state: { billId: row.id }
+      state: { bill: row, customer: this.CUSTOMERDATA }
     });
     this.dialogRef.close();
   }
@@ -65,7 +64,6 @@ export class SearchComponent implements OnInit {
   }
 
   view(row): void {
-    console.log(row);
     this.dialog.open(ViewDialogComponent, { width: '75%' });
   }
 

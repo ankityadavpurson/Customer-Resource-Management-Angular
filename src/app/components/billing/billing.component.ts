@@ -14,29 +14,21 @@ export class BillingComponent implements OnInit {
 
   displayedColumns: string[] = ['itemid', 'name', 'price', 'quantity', 'totalprice'];
   dataSource: BillingDetails[] = [];
-  billId: string;
-
   total = 0;
-
   itemid: string;
   name: string;
   price: number;
   quantity: number;
   totalprice: number;
-
   added = false;
-
   billForm: FormGroup;
+  state: any;
 
   constructor(
-    private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
-    const state = this.router.getCurrentNavigation().extras.state;
-    if (state) {
-      console.log(state.billId);
-      this.billId = state.billId;
-    }
+    this.state = this.router.getCurrentNavigation().extras.state;
   }
 
   ngOnInit() {
@@ -46,6 +38,32 @@ export class BillingComponent implements OnInit {
       type: [{ value: 'guest', disabled: true }],
       email: ['', Validators.required]
     });
+
+    this.mapBill();
+  }
+
+  mapBill() {
+    const state = this.state;
+    if (state) {
+      console.log(state);
+      const { bill, customer } = state;
+      this.billForm.patchValue({
+        mobileNo: customer.mobileNo,
+        name: customer.name,
+        type: customer.primary ? 'primary' : 'guest',
+        email: customer.email,
+      });
+
+      for (const item of bill.items) {
+        this.itemid = item;
+        this.setItem();
+        this.addItemtolist();
+      }
+      this.itemid = undefined;
+      this.name = undefined;
+      this.price = undefined;
+      this.totalprice = undefined;
+    }
   }
 
   findUser() {
@@ -76,11 +94,11 @@ export class BillingComponent implements OnInit {
       }
     }
     this.quantity = this.price ? 1 : undefined;
-    this.totalprice = parseFloat((this.quantity * this.price).toFixed(2));
+    this.totalprice = this.quantity * this.price;
   }
 
   setPrice() {
-    this.totalprice = parseFloat((this.quantity * this.price).toFixed(2));
+    this.totalprice = this.quantity * this.price;
   }
 
   addItemtolist() {
@@ -105,12 +123,19 @@ export class BillingComponent implements OnInit {
         }
       });
 
-      this.total += parseFloat((this.totalprice).toPrecision(2));
+      this.total += this.totalprice;
 
       if (add) { array.push(bill); }
       this.dataSource = [...array];
     }
+  }
 
+  deleteItem(element) {
+    this.dataSource = this.dataSource.filter(item => {
+      return element.itemid !== item.itemid;
+    });
+    this.total = 0;
+    this.dataSource.forEach(item => this.total += item.totalprice);
   }
 
   generateBill() {
