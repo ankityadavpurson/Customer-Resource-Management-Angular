@@ -16,7 +16,8 @@ export class InventoryDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<InventoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Inventory,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) { }
 
   inventoryId: string;
@@ -61,6 +62,7 @@ export class InventoryDialogComponent implements OnInit {
         }
       });
 
+      this.snackBar.open('Item Updated', '', { duration: 2000 });
       this.dialogRef.close(INVENTORY_DATA);
 
     } else {
@@ -75,6 +77,7 @@ export class InventoryDialogComponent implements OnInit {
         discount: 0,
       };
 
+      this.snackBar.open('Item Added', '', { duration: 2000 });
       INVENTORY_DATA.push(item);
       this.dialogRef.close(INVENTORY_DATA);
     }
@@ -92,10 +95,7 @@ export class InventoryDialogComponent implements OnInit {
 })
 export class InventoryComponent implements OnInit {
 
-  constructor(
-    public dialog: MatDialog,
-    private snackBar: MatSnackBar
-  ) { }
+  constructor(public dialog: MatDialog) { }
 
   displayedColumns: string[] = ['id', 'name', 'quantity', 'price', 'type', 'expiryDate', 'edit'];
   inventoryData = INVENTORY_DATA;
@@ -119,12 +119,8 @@ export class InventoryComponent implements OnInit {
   }
 
   editInventory(id) {
-    const dialogRef = this.dialog.open(InventoryDialogComponent, {
+    this.dialog.open(InventoryDialogComponent, {
       width: '80%', data: { id }
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.snackBar.open('Item Updated', '', { duration: 2000 });
     });
   }
 
@@ -134,8 +130,13 @@ export class InventoryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      this.snackBar.open('Item Added', '', { duration: 2000 });
       this.inventoryData = [...res];
+    });
+  }
+
+  deleteInventory(id) {
+    this.inventoryData = this.inventoryData.filter(item => {
+      return id !== item.id;
     });
   }
 

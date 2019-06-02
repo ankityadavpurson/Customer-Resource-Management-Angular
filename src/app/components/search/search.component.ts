@@ -1,24 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { CUSTOMER_DATA, CUSTOMERDATA } from '../../../assets/constant';
+
+export interface MB {
+  mobileNo: number;
+}
 
 @Component({
   selector: 'app-view-dialog',
   templateUrl: 'view.component.html',
   styleUrls: ['./search.component.css']
 })
-export class ViewDialogComponent {
+export class ViewDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ViewDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: MB,
     private router: Router
   ) { }
 
   displayedColumns: string[] = ['id', 'dateOfPurchase', 'discount', 'items', 'total'];
-  CUSTOMERDATA = CUSTOMERDATA[0];
-  billSource = CUSTOMERDATA[0].bill;
+  CUSTOMERDATA;
+  billSource;
+
+  ngOnInit() {
+    for (const customer of CUSTOMERDATA) {
+      if (customer.mobileNo === this.data.mobileNo) {
+        this.CUSTOMERDATA = customer;
+        this.billSource = customer.bill;
+      }
+    }
+  }
 
   selectRow(row) {
     this.router.navigate(['billing'], {
@@ -57,14 +71,16 @@ export class SearchComponent implements OnInit {
       const name = customer.customerName.toLowerCase().match(searchString);
       const billId = customer.billId.toLowerCase().match(searchString);
       const mobileNo = customer.mobileNo.toString().match(searchString);
-
       if (name || billId || mobileNo) { array.push(customer); }
       this.dataSource = array;
     }
   }
 
   view(row): void {
-    this.dialog.open(ViewDialogComponent, { width: '75%' });
+    this.dialog.open(ViewDialogComponent, {
+      width: '75%',
+      data: { mobileNo: row.mobileNo }
+    });
   }
 
 }

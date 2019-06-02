@@ -4,6 +4,7 @@ html, body {
 }
 
 body {
+    background: url('assets/image/cool-background.jpg');
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     /* font-family: "Helvetica Neue", sans-serif; */
