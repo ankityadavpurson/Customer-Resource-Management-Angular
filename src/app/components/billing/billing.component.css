@@ -47,6 +47,10 @@
     font-size: 100%;
 }
 
+.billData tr td{
+    text-align: center; padding: 10px;
+}
+
 .input {
     width: 100%;
     font-size: 100%;

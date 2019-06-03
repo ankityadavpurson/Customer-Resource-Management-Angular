@@ -157,10 +157,36 @@ export class BillingComponent implements OnInit {
   }
 
   printBill(){
-      // let printContents, popupWin;
-      // printContents = document.getElementbyId('billGeneratedDiv').innerHTML;
-      // popupWin 
-    window.print();
+      let printContents, popupWin;
+      printContents = document.getElementById('billGeneratedDiv').innerHTML;
+      popupWin = window.open();
+      popupWin.document.write(
+        `<html>
+          <head>
+            <title>Bill</title>
+            <style>
+                body {
+                  padding:20px;
+                }
+                .billData tr td {
+                  text-align: center; padding: 10px;
+                }
+
+                table {
+                  width:100%;
+                  border:1px solid black;
+                  padding:10px;
+                }
+
+                td, th {
+                  border-bottom:1px solid black;
+                }
+            </style>
+          </head>
+          <body onload="window.print();window.close()">${printContents}</body>
+        </html>`
+      );
+      popupWin.document.close();
   }
 
 }
