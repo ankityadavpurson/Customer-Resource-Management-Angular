@@ -23,6 +23,7 @@ export class BillingComponent implements OnInit {
   added = false;
   billForm: FormGroup;
   state: any;
+  generatedBill = undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -143,7 +144,7 @@ export class BillingComponent implements OnInit {
     const billDetails: BillingDetails[] = this.dataSource;
 
     const bill: Bill = {
-      billId: Math.random(),
+      billId: parseInt(Math.random()*10000),
       user,
       billDetails,
       grandTotal: this.total
@@ -151,6 +152,15 @@ export class BillingComponent implements OnInit {
 
     console.log(JSON.stringify(bill));
 
+    this.generatedBill = bill;
+
+  }
+
+  printBill(){
+      // let printContents, popupWin;
+      // printContents = document.getElementbyId('billGeneratedDiv').innerHTML;
+      // popupWin 
+    window.print();
   }
 
 }
