@@ -1,8 +1,4 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-html, body {
-    height: 100%;
-}
-
 body {
     background: url('assets/image/cool-background.jpg');
     margin: 0;
@@ -48,6 +44,10 @@ table {
     margin-bottom: 20pt;
     padding: 10pt;
     padding-bottom: 0pt;
+}
+
+tr th, tr td {
+    width: 5%;
 }
 
 a {

@@ -1,6 +1,10 @@
 .nav {
-    padding: 10pt;
+    padding: 7pt;
     font-size: 120%;
+    /* border-bottom: 1pt solid black; */
+    /* border-top: 1pt solid black; */
+    height: 25px;
+    background-color: #5353531e
 }
 
 a:hover {

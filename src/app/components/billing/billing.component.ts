@@ -46,7 +46,6 @@ export class BillingComponent implements OnInit {
   mapBill() {
     const state = this.state;
     if (state) {
-      console.log(state);
       const { bill, customer } = state;
       this.billForm.patchValue({
         mobileNo: customer.mobileNo,
@@ -117,7 +116,7 @@ export class BillingComponent implements OnInit {
       let add = true;
 
       this.dataSource.forEach(element => {
-        if (element.itemid === bill.itemid) {
+        if (element.itemid.toLowerCase() === bill.itemid.toLowerCase()) {
           add = false;
           element.quantity += this.quantity;
           element.totalprice += this.totalprice;
@@ -144,24 +143,25 @@ export class BillingComponent implements OnInit {
     const billDetails: BillingDetails[] = this.dataSource;
 
     const bill: Bill = {
-      billId: parseInt(Math.random()*10000),
+      billId: Math.floor((Math.random() * 10000) + 1000),
       user,
       billDetails,
       grandTotal: this.total
     };
 
-    console.log(JSON.stringify(bill));
+    // console.log(JSON.stringify(bill));
 
     this.generatedBill = bill;
 
   }
 
-  printBill(){
-      let printContents, popupWin;
-      printContents = document.getElementById('billGeneratedDiv').innerHTML;
-      popupWin = window.open();
-      popupWin.document.write(
-        `<html>
+  printBill() {
+    let printContents: string;
+    let popupWin: Window;
+    printContents = document.getElementById('billGeneratedDiv').innerHTML;
+    popupWin = window.open();
+    popupWin.document.write(
+      `<html>
           <head>
             <title>Bill</title>
             <style>
@@ -185,8 +185,12 @@ export class BillingComponent implements OnInit {
           </head>
           <body onload="window.print();window.close()">${printContents}</body>
         </html>`
-      );
-      popupWin.document.close();
+    );
+    popupWin.document.close();
+  }
+
+  cencelBill() {
+    this.generatedBill = undefined;
   }
 
 }

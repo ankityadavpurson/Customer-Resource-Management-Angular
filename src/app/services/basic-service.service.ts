@@ -17,7 +17,7 @@ export class BasicServiceService {
   login(userdata) {
     for (const user of LOGINDATA) {
       const { userId, password } = userdata;
-      if (user.userId.match(userId) && user.pass.match(password)) {
+      if (user.userId === userId && user.pass === password) {
         return true;
       }
     }
