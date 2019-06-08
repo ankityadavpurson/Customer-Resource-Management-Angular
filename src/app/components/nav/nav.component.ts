@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterContentChecked } from '@angular/core
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { BasicServiceService } from '../../services/basic-service.service';
+import { BasicService } from '../../services/basic.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +12,7 @@ import { BasicServiceService } from '../../services/basic-service.service';
 export class NavComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   constructor(
-    private service: BasicServiceService,
+    private service: BasicService,
     private router: Router
   ) { }
 

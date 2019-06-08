@@ -1,18 +1,23 @@
 <div class="loginDiv">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <form *ngIf="!register" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
     <label>
       <mat-form-field class="input">
-        <input matInput placeholder="User Id" formControlName="userId">
+        <input matInput placeholder="User Id" formControlName="clientId">
       </mat-form-field>
-      <div *ngIf="submitted && loginForm.controls.userId.errors">
+      <div *ngIf="submitted && loginForm.controls.clientId.errors">
         <span class="error">User Id is required</span>
       </div>
     </label>
 
     <label>
       <mat-form-field class="input">
-        <input matInput type="password" placeholder="Password" formControlName="password">
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </span>
       </mat-form-field>
       <div *ngIf="submitted && loginForm.controls.password.errors">
         <span class="error">Password is required</span>
@@ -22,7 +27,88 @@
     <br><br>
 
     <input type="submit" value="Login" />
-    <input type="button" (click)="openDialog()" value="Forget Password" />
+    <input type="button" (click)="openDialog()" value="Forgot Password" />
+    <!-- <input type="button" (click)="openRegister()" value="Register" /> -->
 
   </form>
+
+  <form *ngIf="register" [formGroup]="registerForm">
+
+    <label>
+      <mat-form-field class="input">
+        <input matInput placeholder="User Id" formControlName="clientId">
+      </mat-form-field>
+      <div *ngIf="submitted && registerForm.controls.clientId.errors">
+        <span class="error">User Id is required</span>
+      </div>
+    </label>
+
+    <label>
+      <mat-form-field class="input">
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+      <div *ngIf="submitted && registerForm.controls.name.errors">
+        <span class="error">Name is required</span>
+      </div>
+    </label>
+
+    <label>
+      <mat-form-field class="input">
+        <input type="tel" matInput placeholder="Mobile No." formControlName="mobileNo"
+          pattern="(\+\d{1,3}[- ]?)?\d{10,13}">
+      </mat-form-field>
+      <div *ngIf="submitted && registerForm.controls.mobileNo.errors">
+        <span class="error">Mobile number is required</span>
+      </div>
+    </label>
+
+    <label>
+      <mat-form-field class="input">
+        <input matInput placeholder="Email" formControlName="email"
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
+      </mat-form-field>
+      <div *ngIf="submitted && registerForm.controls.email.errors">
+        <span class="error">Email is required</span>
+      </div>
+    </label>
+
+    <label>
+      <mat-form-field class="input">
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </span>
+      </mat-form-field>
+      <div *ngIf="submitted && registerForm.controls.password.errors">
+        <span class="error">Password is required</span>
+      </div>
+    </label>
+
+    <label>
+      <mat-form-field class="input">
+        <input matInput placeholder="Shop No." formControlName="shopNo">
+      </mat-form-field>
+      <div *ngIf="submitted && registerForm.controls.shopNo.errors">
+        <span class="error">Shop number is required</span>
+      </div>
+    </label>
+
+    <label>
+      <mat-form-field class="input">
+        <textarea matInput placeholder="Address" formControlName="address"></textarea>
+      </mat-form-field>
+      <div *ngIf="submitted && registerForm.controls.address.errors">
+        <span class="error">Address is required</span>
+      </div>
+    </label>
+
+    <br><br>
+
+    <input type="button" (click)="registerUser()" value="Register" />
+    <input type="button" (click)="openRegister()" value="Login" />
+
+  </form>
+
 </div>
+<br><br>

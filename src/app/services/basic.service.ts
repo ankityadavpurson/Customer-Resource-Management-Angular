@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
-import { LOGINDATA } from 'src/assets/constant';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BasicServiceService {
+export class BasicService {
 
-  constructor() { }
+  constructor(
+    private snackBar: MatSnackBar
+  ) { }
 
   private logged = new BehaviorSubject<boolean>(false);
   currentLogged = this.logged.asObservable();
   changeLogged = (value: boolean) => this.logged.next(value);
 
-  login(userdata) {
-    for (const user of LOGINDATA) {
-      const { userId, password } = userdata;
-      if (user.userId === userId && user.pass === password) {
-        return true;
-      }
-    }
-    return false;
+  tosterOpen = (message: string, action?: string, time?: number) => {
+    this.snackBar.open(message, action, { duration: time });
+  }
+
+  tosterDismiss = () => {
+    this.snackBar.dismiss();
   }
 
   storage = (typeGetSet: 'local-get' | 'local-set' | 'session-get' | 'session-set', key: string, value?: any) => {
@@ -40,4 +39,3 @@ export class BasicServiceService {
   }
 
 }
-

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
-import { BasicServiceService } from '../services/basic-service.service';
+import { BasicService } from '../services/basic.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { BasicServiceService } from '../services/basic-service.service';
 export class RouterGuard implements CanActivate {
 
   constructor(
-    private service: BasicServiceService,
+    private service: BasicService,
     private router: Router
   ) { }
 

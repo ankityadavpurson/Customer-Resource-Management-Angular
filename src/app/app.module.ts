@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Material imports
 import { MatDialogModule } from '@angular/material/dialog';
@@ -14,7 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent, ForgetDialogComponent } from './components/login/login.component';
+import { LoginComponent, ForgotDialogComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { InventoryComponent, InventoryDialogComponent } from './components/inventory/inventory.component';
 import { BillingComponent } from './components/billing/billing.component';
@@ -26,7 +27,7 @@ import { NavComponent } from './components/nav/nav.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ForgetDialogComponent,
+    ForgotDialogComponent,
     InventoryComponent,
     BillingComponent,
     SearchComponent,
@@ -35,7 +36,7 @@ import { NavComponent } from './components/nav/nav.component';
     InventoryDialogComponent
   ],
   entryComponents: [
-    ForgetDialogComponent,
+    ForgotDialogComponent,
     ViewDialogComponent,
     InventoryDialogComponent
   ],
@@ -52,7 +53,8 @@ import { NavComponent } from './components/nav/nav.component';
     MatPaginatorModule,
     MatIconModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

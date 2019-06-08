@@ -28,7 +28,7 @@ export interface CustomerData {
     id: string;
     mobileNo: number;
     name: string;
-    email: string;
+    email?: string;
     customerType: CustomerType;
     address?: string;
     pincode?: number;
@@ -70,4 +70,14 @@ export interface InventoryData {
 enum ItemIype {
     'Stationary',
     'Grocery'
+}
+
+export interface ClientData {
+    clientId: string;
+    name: string;
+    mobileNo: number;
+    email: string;
+    password: string;
+    shopNo: string;
+    address: string;
 }

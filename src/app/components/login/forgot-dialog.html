@@ -1,16 +1,16 @@
-<h1 mat-dialog-title>Forget Paswword</h1>
-<div class="forgetModal">
+<h1 mat-dialog-title>Forgot Paswword</h1>
+<div class="forgotModal">
     <div mat-dialog-content>
         <mat-form-field class="input">
-            <input matInput [(ngModel)]="data.userId" placeholder="User ID">
+            <input matInput [(ngModel)]="data.clientId" placeholder="User ID">
         </mat-form-field>
-        <div *ngIf="send && !data.userId">
+        <div *ngIf="send && !data.clientId">
             <span class="error">User Id is required</span>
         </div>
     </div>
     <div mat-dialog-actions>
         <button mat-button (click)="getPassword()">Send Password</button>
-        <button mat-button [mat-dialog-close]="data.userId" (click)="cancel()">Cancel</button>
+        <button mat-button [mat-dialog-close]="data.clientId" (click)="cancel()">Cancel</button>
     </div>
     <span class="message">The password will be send to you register email.</span>
 </div>

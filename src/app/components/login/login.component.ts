@@ -1,40 +1,37 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { BasicServiceService } from '../../services/basic-service.service';
-import { LOGINDATA } from 'src/assets/constant';
+import { BasicService } from 'src/app/services/basic.service';
+import { RestService } from 'src/app/services/rest.service';
 
 export interface DialogData {
-  userId: string;
+  clientId: string;
 }
 
 @Component({
-  selector: 'app-forget-dialog',
-  templateUrl: 'forget-dialog.html',
+  selector: 'app-forgot-dialog',
+  templateUrl: 'forgot-dialog.html',
   styleUrls: ['./login.component.css']
 })
-export class ForgetDialogComponent {
+export class ForgotDialogComponent {
 
   send = false;
 
   constructor(
-    public dialogRef: MatDialogRef<ForgetDialogComponent>,
+    public dialogRef: MatDialogRef<ForgotDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private snackBar: MatSnackBar) { }
+    private service: BasicService
+  ) { }
 
   getPassword(): void {
     console.log(this.data);
     this.send = true;
-    if (this.data.userId) {
-      // Function calling for forget password
+    if (this.data.clientId) {
+      // Function calling for forgot password
       this.dialogRef.close();
-      this.snackBar.open(
-        'Email is send to your registered email, with password.', '',
-        { duration: 3000 }
-      );
+      this.service.tosterOpen('Email is send to your registered email, with password.', '', 3000);
     }
   }
 
@@ -54,14 +51,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private service: BasicServiceService,
+    private service: BasicService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private rest: RestService
   ) { }
 
   loginForm: FormGroup;
+  registerForm: FormGroup;
+  hide = true;
   submitted = false;
-  userId: string;
+  clientId: string;
+  register = false;
 
   ngOnInit(): void {
 
@@ -70,36 +70,63 @@ export class LoginComponent implements OnInit {
       : this.router.navigate(['']);
 
     this.loginForm = this.formBuilder.group({
-      userId: ['', Validators.required],
+      clientId: ['', Validators.required],
       password: ['', Validators.required]
+    });
+
+    this.registerForm = this.formBuilder.group({
+      clientId: ['', Validators.required],
+      name: ['', Validators.required],
+      mobileNo: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      shopNo: ['', Validators.required],
+      address: ['', Validators.required]
     });
 
   }
 
   onSubmit() {
     this.submitted = true;
-    let found = false;
     if (this.loginForm.invalid) { return; }
 
-    found = this.service.login(this.loginForm.value);
-
-    if (found) {
-      this.snackBar.open('Loading ...', '', { duration: 500 });
-      const token = '12312323123jk12h31kj23h1k23j12k3j12h3kj3h2k3213k12j3h1k2j3h';
-      this.service.storage('session-set', 'token', token);
-      this.service.changeLogged(true);
-      this.router.navigate(['home']);
-    } else {
-      this.snackBar.open('Invalid Credential', '', { duration: 2000 });
-    }
-
+    this.service.tosterOpen('lodding ...', '', 10000);
+    this.rest.post('login', this.loginForm.value,
+      resp => {
+        const found = resp.data !== 0 ? true : false;
+        if (found) {
+          const token = resp.data.accessToken;
+          this.service.storage('session-set', 'token', token);
+          this.service.changeLogged(found);
+          this.router.navigate(['home']);
+          this.service.tosterDismiss();
+        } else {
+          this.service.tosterDismiss();
+          this.service.tosterOpen(resp.message, '', 2000);
+        }
+      });
   }
 
   openDialog() {
-    this.dialog.open(ForgetDialogComponent, {
+    this.dialog.open(ForgotDialogComponent, {
       width: '50%',
-      data: { userId: this.userId }
+      data: { clientId: this.clientId }
     });
+  }
+
+  openRegister() {
+    this.register = !this.register;
+    this.hide = true;
+    this.submitted = false;
+  }
+
+  registerUser() {
+    this.submitted = true;
+    console.log(this.registerForm);
+
+    if (this.registerForm.invalid) { return; }
+
+    console.log(this.registerForm.value);
   }
 
 }
