@@ -23,6 +23,10 @@ export class BasicService {
     this.snackBar.dismiss();
   }
 
+  showError = () => {
+    this.tosterOpen('Server Not Responding, Try Again', 'OK', 5000);
+  }
+
   storage = (typeGetSet: 'local-get' | 'local-set' | 'session-get' | 'session-set', key: string, value?: any) => {
 
     const [type, getSet] = typeGetSet.split('-');

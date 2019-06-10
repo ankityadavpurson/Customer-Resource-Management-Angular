@@ -13,37 +13,38 @@ export class RestService {
     private service: BasicService
   ) { }
 
-  // private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/';
-  private readonly baseUrl: string = 'http://192.168.2.5:3000/';
-  private iSubscribe: Subscription;
+  // private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/'; // Staging baseUrl
+  private readonly baseUrl: string = 'http://localhost:3000/'; // Localhost baseUrl
+
   private token = this.service.storage('session-get', 'token');
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
     token: `$tokenBearer ${this.token}`
   });
 
-  private apiGet(apiName): Observable<any> {
+  private apiGet(apiName: string): Observable<any> {
     return this.http.get(this.baseUrl + apiName, { headers: this.headers });
   }
 
-  private apiPost(apiName, dataInfo): Observable<any> {
+  private apiPost(apiName: string, dataInfo: any): Observable<any> {
     return this.http.post(this.baseUrl + apiName, dataInfo, { headers: this.headers });
   }
 
   get(apiName: string, callBack: (arg: any) => void) {
-    this.iSubscribe = this.apiGet(apiName).subscribe(
+    this.apiGet(apiName).subscribe(
       resp => callBack(resp),
       error => {
-        this.service.tosterOpen('Server Not Responding, Try Again', 'OK', 5000);
+        this.service.showError();
         console.log(error);
-      });
+      }
+    );
   }
 
   post(apiName: string, data: any, callBack: (arg: any) => void) {
-    this.iSubscribe = this.apiPost(apiName, data).subscribe(
+    this.apiPost(apiName, data).subscribe(
       resp => callBack(resp),
       error => {
-        this.service.tosterOpen('Server Not Responding, Try Again', 'OK', 5000);
+        this.service.showError();
         console.log(error);
       }
     );

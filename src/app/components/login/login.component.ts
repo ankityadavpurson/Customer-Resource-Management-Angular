@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { BasicService } from 'src/app/services/basic.service';
 import { RestService } from 'src/app/services/rest.service';
+import { LOGINDATA } from 'src/app/models/schema';
 
 export interface DialogData {
   clientId: string;
@@ -91,6 +92,23 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) { return; }
 
     this.service.tosterOpen('lodding ...', '', 10000);
+
+    // let found = false;
+    // const resp = {
+    //   data: {
+    //     accessToken: 'this is test token'
+    //   },
+    //   message: 'Invlid credential.'
+    // };
+
+    // LOGINDATA.forEach(user => {
+    //   const { clientId, password } = this.loginForm.value;
+    //   if (user.clientId === clientId && user.password === password) {
+    //     found = true;
+    //     return;
+    //   }
+    // });
+
     this.rest.post('login', this.loginForm.value,
       resp => {
         const found = resp.data !== 0 ? true : false;
@@ -122,11 +140,16 @@ export class LoginComponent implements OnInit {
 
   registerUser() {
     this.submitted = true;
-    console.log(this.registerForm);
-
     if (this.registerForm.invalid) { return; }
 
-    console.log(this.registerForm.value);
+    this.service.tosterOpen('lodding ...', '', 10000);
+
+    this.rest.post('client/add', this.registerForm.value,
+      resp => {
+        this.openRegister();
+        this.service.tosterDismiss();
+      });
+
   }
 
 }

@@ -1,9 +1,9 @@
 import { CustomerData, InventoryData } from './models';
 
 export const LOGINDATA = [
-    { userId: '12345', pass: '12345' },
-    { userId: 'admin', pass: 'admin' },
-    { userId: 'deepak', pass: '12345' },
+    { clientId: '12345', password: '12345' },
+    { clientId: 'admin', password: 'admin' },
+    { clientId: 'deepak', password: '12345' },
 ];
 
 export let CUSTOMER_DATA: CustomerData[] = [
