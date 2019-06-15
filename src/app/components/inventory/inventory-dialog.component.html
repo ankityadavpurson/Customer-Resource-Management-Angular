@@ -7,30 +7,38 @@
         <form [formGroup]="inventoryForm">
             <table>
                 <tr>
-                    <td> Item Name</td>
-                    <td><input type="text" formControlName="name"></td>
+                    <td class="tableInput"><label>Item Name</label> </td>
+                    <td class="tableInput"><input type="text" formControlName="name"></td>
                 </tr>
                 <tr>
-                    <td> Quantity</td>
-                    <td><input type="number" formControlName="quantity"></td>
+                    <td class="tableInput"><label>Quantity</label> </td>
+                    <td class="tableInput"><input type="number" formControlName="quantity"></td>
                 </tr>
                 <tr>
-                    <td> Price</td>
-                    <td><input type="number" formControlName="price"></td>
+                    <td class="tableInput"><label>Price</label> </td>
+                    <td class="tableInput"><input type="number" formControlName="price"></td>
                 </tr>
                 <tr>
-                    <td> Type</td>
-                    <td><input type="text" formControlName="type"></td>
+                    <td class="tableInput"><label>Discount</label> </td>
+                    <td class="tableInput"><input type="number" formControlName="discount"></td>
                 </tr>
                 <tr>
-                    <td> Expiry date</td>
-                    <td><input type="date" formControlName="expiryDate"></td>
+                    <td class="tableInput"><label>Type</label> </td>
+                    <!-- <td class="tableInput"><input type="text" formControlName="type"></td> -->
+                    <td class="tableInput">
+                        <select formControlName="type">
+                            <option value="" selected disabled hidden> {{defaultType}} </option>
+                            <option *ngFor="let key of keys" [value]="itemIype[key]">{{itemIype[key]}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableInput"><label>Expiry date</label> </td>
+                    <td class="tableInput"><input type="date" formControlName="expiryDate"></td>
                 </tr>
             </table>
         </form>
     </div>
-</mat-dialog-content>
-<mat-dialog-content>
     <button style="margin-top: 5%" (click)="itemFunction()">
         {{inventoryId ? 'Update Item' : 'Add Item'}}
     </button>

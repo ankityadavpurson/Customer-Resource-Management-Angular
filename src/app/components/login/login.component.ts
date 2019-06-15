@@ -23,16 +23,19 @@ export class ForgotDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ForgotDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private service: BasicService
+    private service: BasicService,
+    private rest: RestService
   ) { }
 
   getPassword(): void {
     console.log(this.data);
     this.send = true;
     if (this.data.clientId) {
-      // Function calling for forgot password
+      this.rest.post('client/forgot', { clientId: this.data.clientId },
+        resp => this.service.tosterOpen(resp.message, '', 3000));
       this.dialogRef.close();
-      this.service.tosterOpen('Email is send to your registered email, with password.', '', 3000);
+      // this.dialogRef.close();
+      // this.service.tosterOpen('Email is send to your registered email, with password.', '', 3000);
     }
   }
 

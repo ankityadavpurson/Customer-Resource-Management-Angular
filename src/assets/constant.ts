@@ -85,7 +85,7 @@ export const CUSTOMERDATA = [
 
 export let INVENTORY_DATA = [
     {
-        id: 'I001',
+        inventoryId: 'I001',
         name: 'pencil',
         quantity: 12,
         price: 12.90,
@@ -94,16 +94,16 @@ export let INVENTORY_DATA = [
         discount: 0
     },
     {
-        id: 'I002',
+        inventoryId: 'I002',
         name: 'bicuit',
         quantity: 18,
         price: 15.20,
         type: 'grocery',
-        expiryDate: '21/12/2029',
+        expiryDate: '2019-10-12',
         discount: 10
     },
     {
-        id: 'I003',
+        inventoryId: 'I003',
         name: 'pencile-box',
         quantity: 21,
         price: 34.60,
@@ -112,7 +112,7 @@ export let INVENTORY_DATA = [
         discount: 0
     },
     {
-        id: 'I004',
+        inventoryId: 'I004',
         name: 'pen',
         quantity: 12,
         price: 16.90,
@@ -121,7 +121,7 @@ export let INVENTORY_DATA = [
         discount: 0
     },
     {
-        id: 'I005',
+        inventoryId: 'I005',
         name: 'tea',
         quantity: 18,
         price: 30.20,
@@ -130,7 +130,7 @@ export let INVENTORY_DATA = [
         discount: 10
     },
     {
-        id: 'I006',
+        inventoryId: 'I006',
         name: 'book',
         quantity: 21,
         price: 120.60,

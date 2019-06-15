@@ -87,7 +87,7 @@ export class BillingComponent implements OnInit {
     this.totalprice = undefined;
 
     for (const item of INVENTORY_DATA) {
-      if (this.itemid.toLowerCase() === item.id.toLowerCase()) {
+      if (this.itemid.toLowerCase() === item.inventoryId.toLowerCase()) {
         const { name, price } = item;
         this.name = name;
         this.price = price;

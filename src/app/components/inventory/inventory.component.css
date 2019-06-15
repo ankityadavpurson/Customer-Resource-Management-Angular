@@ -7,3 +7,29 @@
     margin-left: 2%;
     font-weight: bold;
 }
+
+table {
+    margin-bottom: 0;
+}
+
+.tableInput {
+    width: auto;
+    height: auto;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+}
+
+.tableInput input, select {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 112%;
+    width: 95%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}

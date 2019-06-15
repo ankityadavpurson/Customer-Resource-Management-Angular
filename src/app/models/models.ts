@@ -67,9 +67,13 @@ export interface InventoryData {
     expiryDate?: Date;
 }
 
-enum ItemIype {
+export enum ItemIype {
+    '',
     'Stationary',
-    'Grocery'
+    'Grocery',
+    'Vegitable',
+    'Cold Drinks',
+    'T-Shirt'
 }
 
 export interface ClientData {
