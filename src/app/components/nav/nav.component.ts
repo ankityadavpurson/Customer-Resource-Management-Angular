@@ -30,6 +30,15 @@ export class NavComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   }
 
+  openMenu() {
+    const x = document.getElementById('myTopnav');
+    if (x.className === 'topnav') {
+      x.className += ' responsive';
+    } else {
+      x.className = 'topnav';
+    }
+  }
+
   logout() {
     this.logged = false;
     sessionStorage.clear();

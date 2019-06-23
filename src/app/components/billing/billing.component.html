@@ -74,7 +74,7 @@
 
                     <ng-container matColumnDef="itemid">
                         <th mat-header-cell *matHeaderCellDef class="tableHead"> Item Id </th>
-                        <td mat-cell *matCellDef="let element"> {{element.itemid}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.itemsPurchaseId}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="name">
@@ -134,8 +134,8 @@
                 <th>Total Price</th>
             </tr>
 
-            <tr *ngFor="let item of generatedBill.billDetails">
-                <td>{{item.itemid}}</td>
+            <tr *ngFor="let item of generatedBill.itemsPurchase">
+                <td>{{item.itemsPurchaseId}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.price}}</td>
                 <td>{{item.quantity}}</td>

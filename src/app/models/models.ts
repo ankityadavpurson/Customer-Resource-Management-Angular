@@ -1,5 +1,5 @@
 export interface BillingDetails {
-    itemid?: string;
+    itemsPurchaseId?: string;
     name?: string;
     price?: number;
     quantity?: number;
@@ -17,9 +17,11 @@ export interface UserData {
 export interface Bill {
     billId: number;
     user: UserData;
-    billDetails: BillingDetails[];
+    itemsPurchase: BillingDetails[];
     discount?: number;
     grandTotal: number;
+    dateOfPurchase: Date;
+
 }
 
 // Interfaces for app

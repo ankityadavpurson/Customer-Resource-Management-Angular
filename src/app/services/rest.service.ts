@@ -13,13 +13,12 @@ export class RestService {
     private service: BasicService
   ) { }
 
-  // private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/'; // Staging baseUrl
-  private readonly baseUrl: string = 'http://localhost:3000/'; // Localhost baseUrl
+  private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/'; // Staging baseUrl
+  // private readonly baseUrl: string = 'http://localhost:3000/'; // Localhost baseUrl
 
-  private token = this.service.storage('session-get', 'token');
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    token: `$tokenBearer ${this.token}`
+    token: `$tokenBearer ${sessionStorage.getItem('token')}`
   });
 
   private apiGet(apiName: string): Observable<any> {

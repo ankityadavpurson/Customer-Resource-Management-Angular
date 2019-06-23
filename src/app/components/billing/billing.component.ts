@@ -105,18 +105,19 @@ export class BillingComponent implements OnInit {
     this.added = true;
     if (this.billForm.valid) {
       const bill = {
-        itemid: this.itemid,
+        itemsPurchaseId: this.itemid,
         name: this.name,
         price: this.price,
         quantity: this.quantity,
-        totalprice: this.totalprice
+        totalprice: this.totalprice,
+        discount: 0
       };
 
       const array = this.dataSource;
       let add = true;
 
       this.dataSource.forEach(element => {
-        if (element.itemid.toLowerCase() === bill.itemid.toLowerCase()) {
+        if (element.itemsPurchaseId.toLowerCase() === bill.itemsPurchaseId.toLowerCase()) {
           add = false;
           element.quantity += this.quantity;
           element.totalprice += this.totalprice;
@@ -132,7 +133,7 @@ export class BillingComponent implements OnInit {
 
   deleteItem(element) {
     this.dataSource = this.dataSource.filter(item => {
-      return element.itemid !== item.itemid;
+      return element.itemid !== item.itemsPurchaseId;
     });
     this.total = 0;
     this.dataSource.forEach(item => this.total += item.totalprice);
@@ -140,16 +141,19 @@ export class BillingComponent implements OnInit {
 
   generateBill() {
     const user: UserData = this.billForm.value;
-    const billDetails: BillingDetails[] = this.dataSource;
+    const itemsPurchase: BillingDetails[] = this.dataSource;
 
     const bill: Bill = {
       billId: Math.floor((Math.random() * 10000) + 1000),
       user,
-      billDetails,
-      grandTotal: this.total
+      itemsPurchase,
+      discount: 0,
+      grandTotal: this.total,
+      dateOfPurchase: new Date()
     };
 
-    // console.log(JSON.stringify(bill));
+    console.log(this.billForm.value);
+    console.log(JSON.stringify(bill));
 
     this.generatedBill = bill;
 

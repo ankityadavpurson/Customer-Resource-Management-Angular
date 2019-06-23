@@ -1,11 +1,12 @@
-<div class="nav" *ngIf="logged">
-  <ul>
-    <label *ngIf="!home">
-      <li class="other"><a routerLinkActive="active" routerLink="/home">Home</a></li>
-      <li class="other"><a routerLinkActive="active" routerLink="/billing">Billing</a></li>
-      <li class="other"><a routerLinkActive="active" routerLink="/inventory">Inventory</a></li>
-      <li class="other"><a routerLinkActive="active" routerLink="/search">Search</a></li>
-    </label>
-    <li class="logout" (click)="logout()"> <a routerLink="">Logout</a> </li>
-  </ul>
+<div class="topnav" id="myTopnav" *ngIf="logged">
+  <label *ngIf="!home">
+    <a routerLinkActive="active" routerLink="/home">Home</a>
+    <a routerLinkActive="active" routerLink="/billing" (click)="openMenu()" >Billing</a>
+    <a routerLinkActive="active" routerLink="/inventory" (click)="openMenu()">Inventory</a>
+    <a routerLinkActive="active" routerLink="/search" (click)="openMenu()">Search</a>
+    <a href="javascript:void(0);" class="icon" (click)="openMenu()">
+      <mat-icon>menu</mat-icon>
+    </a>
+  </label>
+  <a routerLink="" (click)="logout()" style="float: right;">Logout</a>
 </div>
