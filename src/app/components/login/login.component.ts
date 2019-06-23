@@ -116,8 +116,8 @@ export class LoginComponent implements OnInit {
       resp => {
         const found = resp.data !== 0 ? true : false;
         if (found) {
-          const token = resp.data.accessToken;
-          this.service.storage('session-set', 'token', token);
+          this.service.storage('session-set', 'token', resp.data.accessToken);
+          this.service.storage('session-set', 'dbid', resp.data.clientId);
           this.service.changeLogged(found);
           this.router.navigate(['home']);
           this.service.tosterDismiss();

@@ -131,7 +131,7 @@ export class BillingComponent implements OnInit {
     }
   }
 
-  deleteItem(element) {
+  deleteItem(element: { itemid: string; }) {
     this.dataSource = this.dataSource.filter(item => {
       return element.itemid !== item.itemsPurchaseId;
     });

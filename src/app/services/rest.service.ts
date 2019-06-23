@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BasicService } from './basic.service';
 
 @Injectable({
@@ -13,20 +13,27 @@ export class RestService {
     private service: BasicService
   ) { }
 
-  private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/'; // Staging baseUrl
-  // private readonly baseUrl: string = 'http://localhost:3000/'; // Localhost baseUrl
-
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    token: `$tokenBearer ${sessionStorage.getItem('token')}`
-  });
+  // private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/'; // Staging baseUrl
+  private readonly baseUrl: string = 'http://localhost:3000/'; // Localhost baseUrl
 
   private apiGet(apiName: string): Observable<any> {
-    return this.http.get(this.baseUrl + apiName, { headers: this.headers });
+    return this.http.get(this.baseUrl + apiName, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        token: `$tokenBearer ${this.service.storage('session-get', 'token')}`,
+        dbid: `${this.service.storage('session-get', 'dbid')}`
+      })
+    });
   }
 
   private apiPost(apiName: string, dataInfo: any): Observable<any> {
-    return this.http.post(this.baseUrl + apiName, dataInfo, { headers: this.headers });
+    return this.http.post(this.baseUrl + apiName, dataInfo, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        token: `$tokenBearer ${this.service.storage('session-get', 'token')}`,
+        dbid: `${this.service.storage('session-get', 'dbid')}`
+      })
+    });
   }
 
   get(apiName: string, callBack: (arg: any) => void) {
