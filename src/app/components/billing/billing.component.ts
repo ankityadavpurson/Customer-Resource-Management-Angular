@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { INVENTORY_DATA, CUSTOMERDATA } from '../../../assets/constant';
 import { BillingDetails, UserData, Bill } from 'src/app/models/models';
+import { RestService } from 'src/app/services/rest.service';
 
 @Component({
   selector: 'app-billing',
@@ -27,7 +28,8 @@ export class BillingComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private rest: RestService
   ) {
     this.state = this.router.getCurrentNavigation().extras.state;
   }
@@ -50,51 +52,46 @@ export class BillingComponent implements OnInit {
       this.billForm.patchValue({
         mobileNo: customer.mobileNo,
         name: customer.name,
-        type: customer.primary ? 'primary' : 'guest',
+        type: customer.customerType === 'Guest' ? 'guest' : 'primary',
         email: customer.email,
       });
 
-      for (const item of bill.items) {
-        this.itemid = item;
-        this.setItem();
-        this.addItemtolist();
-      }
-      this.itemid = undefined;
-      this.name = undefined;
-      this.price = undefined;
-      this.totalprice = undefined;
+      this.added = true;
+      this.total = bill.total;
+      this.dataSource = [...bill.itemsPurchase];
     }
   }
 
   findUser() {
     const { mobileNo } = this.billForm.value;
-    for (const customer of CUSTOMERDATA) {
-      if (customer.mobileNo === mobileNo) {
+    this.rest.get('billing/customer?mobileNo=' + (mobileNo || 0),
+      resp => {
+        const { data } = resp;
         this.billForm.patchValue({
-          name: customer.name,
-          type: customer.primary ? 'primary' : 'guest',
-          email: customer.email,
+          name: data.name,
+          type: data.customerType === 'Guest' ? 'guest' : 'primary',
+          email: data.email,
         });
-      }
-    }
+      });
 
   }
 
-  setItem() {
+  setItem(id = this.itemid) {
 
+    this.itemid = id;
     this.name = undefined;
     this.price = undefined;
     this.totalprice = undefined;
 
-    for (const item of INVENTORY_DATA) {
-      if (this.itemid.toLowerCase() === item.inventoryId.toLowerCase()) {
-        const { name, price } = item;
+    this.rest.get('inventory/item?id=' + (this.itemid || 0),
+      resp => {
+        const { name, price } = resp.data;
         this.name = name;
         this.price = price;
-      }
-    }
-    this.quantity = this.price ? 1 : undefined;
-    this.totalprice = this.quantity * this.price;
+
+        this.quantity = this.price ? 1 : undefined;
+        this.totalprice = this.quantity * this.price;
+      });
   }
 
   setPrice() {
@@ -117,7 +114,7 @@ export class BillingComponent implements OnInit {
       let add = true;
 
       this.dataSource.forEach(element => {
-        if (element.itemsPurchaseId.toLowerCase() === bill.itemsPurchaseId.toLowerCase()) {
+        if (element.itemsPurchaseId === bill.itemsPurchaseId) {
           add = false;
           element.quantity += this.quantity;
           element.totalprice += this.totalprice;
@@ -131,12 +128,13 @@ export class BillingComponent implements OnInit {
     }
   }
 
-  deleteItem(element: { itemid: string; }) {
+  deleteItem(element) {
     this.dataSource = this.dataSource.filter(item => {
-      return element.itemid !== item.itemsPurchaseId;
+      return element.itemsPurchaseId !== item.itemsPurchaseId;
     });
     this.total = 0;
     this.dataSource.forEach(item => this.total += item.totalprice);
+    if (this.dataSource.length === 0) { this.added = false; }
   }
 
   generateBill() {
@@ -144,7 +142,7 @@ export class BillingComponent implements OnInit {
     const itemsPurchase: BillingDetails[] = this.dataSource;
 
     const bill: Bill = {
-      billId: Math.floor((Math.random() * 10000) + 1000),
+      billId: 100,
       user,
       itemsPurchase,
       discount: 0,
@@ -152,11 +150,11 @@ export class BillingComponent implements OnInit {
       dateOfPurchase: new Date()
     };
 
-    console.log(this.billForm.value);
-    console.log(JSON.stringify(bill));
-
-    this.generatedBill = bill;
-
+    this.rest.post('billing/addBill', bill,
+      resp => {
+        bill.billId = resp.data.billId;
+        this.generatedBill = bill;
+      });
   }
 
   printBill() {
@@ -195,6 +193,17 @@ export class BillingComponent implements OnInit {
 
   cencelBill() {
     this.generatedBill = undefined;
+  }
+
+  nextBill() {
+    this.generatedBill = undefined;
+    this.itemid = undefined;
+    this.name = undefined;
+    this.price = undefined;
+    this.totalprice = undefined;
+    this.dataSource = [];
+    this.added = false;
+    this.billForm.reset();
   }
 
 }

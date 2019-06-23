@@ -1,8 +1,8 @@
 
 export const CUSTOMER_DATA = [
-    { customerName: 'Deeapk', billId: 'B001', dateOfPurchase: '12/05/2019', emailId: 'deepak@gmial.com', mobileNo: 9867564320 },
-    { customerName: 'Ankit', billId: 'B001', dateOfPurchase: '14/05/2019', emailId: 'ankit@gmial.com', mobileNo: 8975436778 },
-    { customerName: 'Piyush', billId: 'B005', dateOfPurchase: '13/05/2019', emailId: 'piyush@gmial.com', mobileNo: 9086342367 }
+    { name: 'Deeapk', billId: 'B001', dateOfPurchase: '12/05/2019', email: 'deepak@gmial.com', mobileNo: 9867564320 },
+    { name: 'Ankit', billId: 'B001', dateOfPurchase: '14/05/2019', email: 'ankit@gmial.com', mobileNo: 8975436778 },
+    { name: 'Piyush', billId: 'B005', dateOfPurchase: '13/05/2019', email: 'piyush@gmial.com', mobileNo: 9086342367 }
 ];
 
 export const CUSTOMERDATA = [

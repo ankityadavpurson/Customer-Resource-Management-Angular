@@ -6,7 +6,8 @@
                 <td><strong>Name : </strong></td>
                 <td>
                     <span>{{CUSTOMERDATA.name}}</span>
-                    <mat-icon class="primary" *ngIf="CUSTOMERDATA.primary">done</mat-icon>
+                    <!-- <mat-icon class="primary" *ngIf="CUSTOMERDATA.primary">done</mat-icon> -->
+                    <mat-icon class="primary" *ngIf="CUSTOMERDATA.customerType === 'primary'">done</mat-icon>
                 </td>
             </tr>
 
@@ -33,20 +34,17 @@
 
 
         <strong> Bills : </strong><br><br>
-        <!-- <span *ngFor="let bill of CUSTOMERDATA.bill">
-                {{bill.id}}
-            </span> -->
 
         <table mat-table [dataSource]="billSource" class="mat-elevation-z8 table">
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef class="tableHead"> Bill Id </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.billId}} </td>
             </ng-container>
 
             <ng-container matColumnDef="dateOfPurchase">
                 <th mat-header-cell *matHeaderCellDef class="tableHead"> Date Of Purchase </th>
-                <td mat-cell *matCellDef="let element"> {{element.dateOfPurchase}} </td>
+                <td mat-cell *matCellDef="let element"> {{this.service.moment(element.dateOfPurchase)}} </td>
             </ng-container>
 
             <ng-container matColumnDef="discount">
@@ -56,7 +54,7 @@
 
             <ng-container matColumnDef="items">
                 <th mat-header-cell *matHeaderCellDef class="tableHead"> Items </th>
-                <td mat-cell *matCellDef="let element"> {{element.items.length}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.itemsPurchase.length}} </td>
             </ng-container>
 
             <ng-container matColumnDef="total">
