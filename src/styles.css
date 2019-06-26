@@ -97,3 +97,17 @@ a {
     background-color: rgb(228, 228, 228);
     cursor: pointer;
 }
+
+.noData {
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.online {
+    background: rgb(0, 109, 18);
+}
+
+.offline {
+    background: rgb(177, 4, 4);
+}

@@ -37,23 +37,31 @@ export class RestService {
   }
 
   get(apiName: string, callBack: (arg: any) => void) {
-    this.apiGet(apiName).subscribe(
-      resp => callBack(resp),
-      error => {
-        this.service.showError();
-        console.log(error);
-      }
-    );
+    if (window.navigator.onLine) {
+      this.apiGet(apiName).subscribe(
+        resp => callBack(resp),
+        error => {
+          this.service.showError();
+          console.log(error);
+        }
+      );
+    } else {
+      this.service.tosterOpen('Check your Connection.', 'ok', 2000, ['offline']);
+    }
   }
 
   post(apiName: string, data: any, callBack: (arg: any) => void) {
-    this.apiPost(apiName, data).subscribe(
-      resp => callBack(resp),
-      error => {
-        this.service.showError();
-        console.log(error);
-      }
-    );
+    if (window.navigator.onLine) {
+      this.apiPost(apiName, data).subscribe(
+        resp => callBack(resp),
+        error => {
+          this.service.showError();
+          console.log(error);
+        }
+      );
+    } else {
+      this.service.tosterOpen('Check your Connection.', 'ok', 2000, ['offline']);
+    }
   }
 
 }

@@ -15,8 +15,8 @@ export class BasicService {
   currentLogged = this.logged.asObservable();
   changeLogged = (value: boolean) => this.logged.next(value);
 
-  tosterOpen = (message: string, action?: string, time?: number) => {
-    this.snackBar.open(message, action, { duration: time });
+  tosterOpen = (message: string, action?: string, time?: number, classNames?: string[]) => {
+    this.snackBar.open(message, action, { duration: time || 2000, panelClass: classNames });
   }
 
   tosterDismiss = () => {

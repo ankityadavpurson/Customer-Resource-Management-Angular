@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
   searchString: string;
 
   displayedColumns: string[] = ['billId', 'name', 'dateOfPurchase', 'mobileNo', 'email'];
-  dataSource = CUSTOMER_DATA;
+  dataSource = [];
   allBills = [];
 
   constructor(

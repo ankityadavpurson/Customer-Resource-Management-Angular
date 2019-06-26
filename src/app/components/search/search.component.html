@@ -1,49 +1,53 @@
 <div class="center">
-    <h2>Customer Bills</h2>
-  </div>
+  <h2>Customer Bills</h2>
+</div>
 <div>
-  <div class="searchInput">
+  <div *ngIf="dataSource.length !== 0" class="searchInput">
     <mat-form-field>
       <input matInput [(ngModel)]="searchString" (keyup)="search()" placeholder=" Search ...">
     </mat-form-field>
   </div>
 
   <div class="tableDiv">
+    <div *ngIf="dataSource.length === 0">
+      <p class="noData">No Customer</p>
+      <hr>
+    </div>
+    <div *ngIf="dataSource.length !== 0">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+        <ng-container matColumnDef="billId">
+          <th mat-header-cell *matHeaderCellDef class="tableHead"> Bill Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.billId}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="billId">
-        <th mat-header-cell *matHeaderCellDef class="tableHead"> Bill Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.billId}} </td>
-      </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="tableHead"> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef class="tableHead"> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
+        <ng-container matColumnDef="dateOfPurchase">
+          <th mat-header-cell *matHeaderCellDef class="tableHead"> Date of Purchase </th>
+          <td mat-cell *matCellDef="let element"> {{this.service.moment(element.dateOfPurchase)}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="dateOfPurchase">
-        <th mat-header-cell *matHeaderCellDef class="tableHead"> Date of Purchase </th>
-        <td mat-cell *matCellDef="let element"> {{this.service.moment(element.dateOfPurchase)}} </td>
-      </ng-container>
+        <ng-container matColumnDef="mobileNo">
+          <th mat-header-cell *matHeaderCellDef class="tableHead"> Mobile No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="mobileNo">
-        <th mat-header-cell *matHeaderCellDef class="tableHead"> Mobile No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
-      </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="tableHead"> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef class="tableHead"> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="view(row)" class="trHover"></tr>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="view(row)" class="trHover"></tr>
+      </table>
 
-    </table>
-
-    <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator> -->
-
+      <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator> -->
+    </div>
   </div>
 
 </div>
