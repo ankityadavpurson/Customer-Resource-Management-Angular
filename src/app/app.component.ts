@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     private service: BasicService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
     window.addEventListener('online', (e) => {
       this.service.tosterOpen('Back to online', '', 2000, ['online']);

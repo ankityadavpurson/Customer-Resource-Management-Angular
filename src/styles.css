@@ -111,3 +111,8 @@ a {
 .offline {
     background: rgb(177, 4, 4);
 }
+
+.mat-dialog-container {
+    background-image: url('./assets/image/dialog-background.jpg');
+    border: 1px solid black;
+}

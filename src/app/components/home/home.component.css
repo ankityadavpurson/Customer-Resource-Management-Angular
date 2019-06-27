@@ -6,7 +6,6 @@
 
 .box {
     display: inline-flex;
-    text-align: center;
     border: 2pt solid black;
     margin: 20pt;
     padding: 3%;
@@ -14,7 +13,20 @@
     height: 50pt;
     transition: 0.4s;
     cursor: pointer;
-    font-size: 130%;
+}
+
+@media screen and (min-width: 800px) {
+    .box {
+        transition: 0.4s;
+        font-size: 2.2vw;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .box {
+        transition: 0.4s;
+        font-size: 3.5vw;
+    }
 }
 
 .box:hover {

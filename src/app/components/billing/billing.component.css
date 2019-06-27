@@ -4,15 +4,6 @@
     margin-top: 10%;
 }
 
-.box {
-    display: inline-block;
-    border: 2pt solid black;
-    margin: 10pt;
-    padding: 10pt;
-    height: 10pt;
-    width: 100pt;
-}
-
 .generatebill {
     text-align: center;
 }
@@ -30,12 +21,11 @@
 
 .billDiv {
     width: 80%;
-    height: auto;
+    height: 100%;
     border: 2px solid black;
     margin: auto;
-    margin-bottom: 2%;
     padding: 10pt;
-    font-size: 100%;
+    margin-bottom: 3%;
 }
 
 .billGeneratedDiv {
@@ -61,22 +51,33 @@
 .addItem {
     margin-left: 3%;
     margin-right: 3%;
+    border: 1px solid gray;
+    padding: 2%;
 }
 
-.addItem tr th, .addItem tr td {
-    width: auto;
-}
-
-table {
-    margin-bottom: 0;
-}
-
-.add {
-    float: right;
+.addItem .input {
+    width: 45%;
+    margin-left: 3%;
+    font-size: 115%;
 }
 
 .type {
     font-size: 80%;
     font-weight: 500;
     color: #7b1fa2;
+}
+
+.itemInput {
+    border: 2px solid black;
+    width: 50%;
+}
+
+input:disabled {
+    color: black;
+}
+
+.addBtn {
+    margin-left: 7.5%;
+    width: 30%;
+    font-size: 120%;
 }

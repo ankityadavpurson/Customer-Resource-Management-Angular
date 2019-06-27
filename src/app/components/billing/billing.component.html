@@ -43,30 +43,35 @@
         </form>
 
         <div class="addItem">
-            <table cellpadding="5">
-                <tr>
-                    <td>Item ID</td>
-                    <td>Item Name </td>
-                    <td>Price/Item</td>
-                    <td>Quantity</td>
-                    <td>Total Price</td>
-                </tr>
-                <tr>
-                    <td><input [(ngModel)]="itemid" type="number" (change)="setItem()" (keyup)="setItem()"></td>
-                    <td><input [(ngModel)]="name" type="text" disabled></td>
-                    <td><input [(ngModel)]="price" type="text" disabled></td>
-                    <td><input [(ngModel)]="quantity" type="number" min="1" (change)="setPrice()" (keyup)="setPrice()">
-                    </td>
-                    <td><input [(ngModel)]="totalprice" type="number" disabled></td>
-                </tr>
-                <tr>
-                    <td colspan="5">
-                        <input type="button" value="Add" *ngIf="totalprice" class="add" (click)="addItemtolist()">
-                    </td>
-                </tr>
-            </table>
 
+            <p>Enter item details -</p>
+
+            <mat-form-field class="input">
+                <input matInput placeholder="Item Id" [(ngModel)]="itemid" type="number" min="1" (change)="setItem()"
+                    (keyup)="setItem()">
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <input matInput placeholder="Quantity" [(ngModel)]="quantity" type="number" min="1"
+                    (change)="setPrice()" (keyup)="setPrice()">
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <input matInput placeholder="Price/Item" [(ngModel)]="price" type="text" disabled>
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <input matInput placeholder="Total" [(ngModel)]="totalprice" type="number" disabled>
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <input matInput placeholder="Item Name" [(ngModel)]="name" type="text" disabled>
+            </mat-form-field>
+
+            <input type="button" value="Add" [disabled]="totalprice === undefined" (click)="addItemtolist()"
+                class="addBtn">
         </div>
+
         <div *ngIf="added && billForm.valid">
             <div class="tableDiv">
 

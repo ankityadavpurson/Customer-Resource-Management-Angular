@@ -2,11 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { CUSTOMER_DATA, CUSTOMERDATA } from '../../../assets/constant';
 import { RestService } from 'src/app/services/rest.service';
 import { BasicService } from 'src/app/services/basic.service';
 
-export interface MB {
+interface MB {
   mobileNo: number;
   customerData: any;
 }
@@ -32,9 +31,11 @@ export class ViewDialogComponent implements OnInit {
   ngOnInit() {
     this.CUSTOMERDATA = this.data.customerData;
     this.billSource = this.data.customerData.bills;
+    this.service.tosterDismiss();
   }
 
   selectRow(row) {
+    this.service.tosterOpen('Loading ...');
     this.CUSTOMERDATA.bills = [];
     this.router.navigate(['billing'], {
       state: { bill: row, customer: this.CUSTOMERDATA }
@@ -52,7 +53,7 @@ export class ViewDialogComponent implements OnInit {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
 
   searchString: string;
 
@@ -64,14 +65,18 @@ export class SearchComponent implements OnInit {
     public dialog: MatDialog,
     private rest: RestService,
     private service: BasicService
-  ) { }
+  ) {
+    this.loadAllBills();
+  }
 
-  ngOnInit() {
+  loadAllBills() {
+    this.service.tosterOpen('Loading bills ...');
     this.rest.get('billing/allBills',
       resp => {
         this.dataSource = resp.data;
         this.allBills = resp.data;
         this.dataSource.reverse();
+        this.service.tosterDismiss();
       });
   }
 
@@ -91,7 +96,8 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  view(row) {
+  view(row: { mobileNo: string; }) {
+    this.service.tosterOpen('Loading details...');
     this.rest.get('billing/customer?mobileNo=' + row.mobileNo,
       resp => {
         this.dialog.open(ViewDialogComponent, {
@@ -100,5 +106,4 @@ export class SearchComponent implements OnInit {
         });
       });
   }
-
 }

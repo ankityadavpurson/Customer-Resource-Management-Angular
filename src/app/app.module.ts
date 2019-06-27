@@ -21,6 +21,7 @@ import { InventoryComponent, InventoryDialogComponent } from './components/inven
 import { BillingComponent } from './components/billing/billing.component';
 import { SearchComponent, ViewDialogComponent } from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +34,14 @@ import { NavComponent } from './components/nav/nav.component';
     SearchComponent,
     NavComponent,
     ViewDialogComponent,
-    InventoryDialogComponent
+    InventoryDialogComponent,
+    ConfirmComponent
   ],
   entryComponents: [
     ForgotDialogComponent,
     ViewDialogComponent,
-    InventoryDialogComponent
+    InventoryDialogComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

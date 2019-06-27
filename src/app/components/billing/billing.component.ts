@@ -5,6 +5,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { INVENTORY_DATA, CUSTOMERDATA } from '../../../assets/constant';
 import { BillingDetails, UserData, Bill } from 'src/app/models/models';
 import { RestService } from 'src/app/services/rest.service';
+import { BasicService } from 'src/app/services/basic.service';
+import { MatDialog } from '@angular/material';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-billing',
@@ -27,9 +30,11 @@ export class BillingComponent implements OnInit {
   generatedBill = undefined;
 
   constructor(
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private router: Router,
-    private rest: RestService
+    private rest: RestService,
+    private service: BasicService
   ) {
     this.state = this.router.getCurrentNavigation().extras.state;
   }
@@ -59,11 +64,13 @@ export class BillingComponent implements OnInit {
       this.added = true;
       this.total = bill.total;
       this.dataSource = [...bill.itemsPurchase];
+      this.service.tosterDismiss();
     }
   }
 
   findUser() {
     const { mobileNo } = this.billForm.value;
+    this.service.tosterOpen('Loading ...');
     this.rest.get('billing/customer?mobileNo=' + (mobileNo || 0),
       resp => {
         const { data } = resp;
@@ -72,6 +79,7 @@ export class BillingComponent implements OnInit {
           type: data.customerType === 'Guest' ? 'guest' : 'primary',
           email: data.email,
         });
+        this.service.tosterDismiss();
       });
 
   }
@@ -83,6 +91,7 @@ export class BillingComponent implements OnInit {
     this.price = undefined;
     this.totalprice = undefined;
 
+    this.service.tosterOpen('Loading ...');
     this.rest.get('inventory/item?id=' + (this.itemid || 0),
       resp => {
         const { name, price } = resp.data;
@@ -91,6 +100,7 @@ export class BillingComponent implements OnInit {
 
         this.quantity = this.price ? 1 : undefined;
         this.totalprice = this.quantity * this.price;
+        this.service.tosterDismiss();
       });
   }
 
@@ -128,14 +138,21 @@ export class BillingComponent implements OnInit {
     }
   }
 
-  deleteItem(element) {
-    this.dataSource = this.dataSource.filter(item => {
-      return element.itemsPurchaseId !== item.itemsPurchaseId;
+  deleteItem(element: { itemsPurchaseId: string; }) {
+    const dialogRef = this.dialog.open(ConfirmComponent, { width: '35%' });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.dataSource = this.dataSource.filter(item => {
+          return element.itemsPurchaseId !== item.itemsPurchaseId;
+        });
+        this.total = 0;
+        this.dataSource.forEach(item => this.total += item.totalprice);
+        if (this.dataSource.length === 0) { this.added = false; }
+      }
     });
-    this.total = 0;
-    this.dataSource.forEach(item => this.total += item.totalprice);
-    if (this.dataSource.length === 0) { this.added = false; }
   }
+
 
   generateBill() {
     const user: UserData = this.billForm.value;
@@ -150,10 +167,12 @@ export class BillingComponent implements OnInit {
       dateOfPurchase: new Date()
     };
 
+    this.service.tosterOpen('Generating bill ...');
     this.rest.post('billing/addBill', bill,
       resp => {
         bill.billId = resp.data.billId;
         this.generatedBill = bill;
+        this.service.tosterDismiss();
       });
   }
 
