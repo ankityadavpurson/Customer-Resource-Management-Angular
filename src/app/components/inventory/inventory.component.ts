@@ -29,7 +29,11 @@ export class InventoryDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private rest: RestService,
     private service: BasicService
-  ) { }
+  ) {
+    if (data.id) {
+      this.service.tosterOpen('loading item ...');
+    }
+  }
 
   ngOnInit() {
 
@@ -46,26 +50,27 @@ export class InventoryDialogComponent implements OnInit {
 
     this.inventoryId = this.data.id;
 
-    if (this.inventoryId) {
-      this.service.tosterOpen('loading iten ...');
-      this.inventoryForm.disable();
-      this.rest.get('inventory/item?id=' + this.inventoryId, (resp) => {
-        const { name, quantity, price, discount, type, expiryDate, _id } = resp.data;
-        this.Id = _id;
-        this.inventoryForm.patchValue({
-          name: this.inventoryId ? name : '',
-          quantity: this.inventoryId ? quantity : '',
-          price: this.inventoryId ? price : '',
-          discount: this.inventoryId ? discount : '',
-          type: this.inventoryId ? type : '',
-          expiryDate: this.inventoryId ? expiryDate : '',
-        });
-        this.defaultType = type;
-        this.inventoryForm.enable();
-        this.service.tosterDismiss();
-      });
-    }
+    if (this.inventoryId) { this.fillItemForm(); }
 
+  }
+
+  private fillItemForm() {
+    this.inventoryForm.disable();
+    this.rest.get('inventory/item?id=' + this.inventoryId, (resp) => {
+      const { name, quantity, price, discount, type, expiryDate, _id } = resp.data;
+      this.Id = _id;
+      this.inventoryForm.patchValue({
+        name: this.inventoryId ? name : '',
+        quantity: this.inventoryId ? quantity : '',
+        price: this.inventoryId ? price : '',
+        discount: this.inventoryId ? discount : '',
+        type: this.inventoryId ? type : '',
+        expiryDate: this.inventoryId ? expiryDate : '',
+      });
+      this.defaultType = type;
+      this.inventoryForm.enable();
+      this.service.tosterDismiss();
+    });
   }
 
   itemFunction() {
@@ -119,13 +124,14 @@ export class InventoryComponent {
   inventoryData = [];
   searchString: string;
   confirm: any;
+  loading = true;
 
   constructor(
     public dialog: MatDialog,
     private rest: RestService,
     private service: BasicService
   ) {
-    this.service.tosterOpen('loading itens ...');
+    this.service.tosterOpen('loading items ...');
     this.getAllItems();
   }
 
@@ -134,6 +140,7 @@ export class InventoryComponent {
       this.inventoryData = resp.data;
       this.inventoryData.reverse();
       this.INVENTORIES = this.inventoryData;
+      this.loading = false;
       this.service.tosterDismiss();
     });
   }

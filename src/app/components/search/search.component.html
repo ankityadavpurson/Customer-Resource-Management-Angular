@@ -10,7 +10,7 @@
 
   <div class="tableDiv">
     <div *ngIf="dataSource.length === 0">
-      <p class="noData">No Customer</p>
+      <p class="noData">{{loading ? "Geting data from database ..." : "No Customer"}}</p>
       <hr>
     </div>
     <div *ngIf="dataSource.length !== 0">

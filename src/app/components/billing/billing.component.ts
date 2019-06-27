@@ -16,7 +16,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 })
 export class BillingComponent implements OnInit {
 
-  displayedColumns: string[] = ['itemid', 'name', 'price', 'quantity', 'totalprice'];
+  displayedColumns: string[] = ['itemid', 'name', 'price', 'quantity', 'totalprice', 'delete'];
   dataSource: BillingDetails[] = [];
   total = 0;
   itemid: string;
@@ -70,18 +70,19 @@ export class BillingComponent implements OnInit {
 
   findUser() {
     const { mobileNo } = this.billForm.value;
-    this.service.tosterOpen('Loading ...');
-    this.rest.get('billing/customer?mobileNo=' + (mobileNo || 0),
-      resp => {
-        const { data } = resp;
-        this.billForm.patchValue({
-          name: data.name,
-          type: data.customerType === 'Guest' ? 'guest' : 'primary',
-          email: data.email,
+    if (mobileNo.toString().length > 5) {
+      this.service.tosterOpen('Loading ...');
+      this.rest.get('billing/customer?mobileNo=' + (mobileNo || 0),
+        resp => {
+          const { data } = resp;
+          this.billForm.patchValue({
+            name: data.name,
+            type: data.customerType === 'Guest' ? 'guest' : 'primary',
+            email: data.email,
+          });
+          this.service.tosterDismiss();
         });
-        this.service.tosterDismiss();
-      });
-
+    }
   }
 
   setItem(id = this.itemid) {

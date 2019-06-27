@@ -11,12 +11,13 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 19px;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .topnav a:hover {
     color: #7b1fa2;
     cursor: pointer;
+    background-color: #00000020;
 }
 
 .topnav .icon {

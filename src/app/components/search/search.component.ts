@@ -22,7 +22,9 @@ export class ViewDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: MB,
     private router: Router,
     private service: BasicService
-  ) { }
+  ) {
+    this.service.tosterDismiss();
+  }
 
   displayedColumns: string[] = ['id', 'dateOfPurchase', 'discount', 'items', 'total'];
   CUSTOMERDATA: any;
@@ -31,16 +33,15 @@ export class ViewDialogComponent implements OnInit {
   ngOnInit() {
     this.CUSTOMERDATA = this.data.customerData;
     this.billSource = this.data.customerData.bills;
-    this.service.tosterDismiss();
   }
 
   selectRow(row) {
-    this.service.tosterOpen('Loading ...');
-    this.CUSTOMERDATA.bills = [];
-    this.router.navigate(['billing'], {
-      state: { bill: row, customer: this.CUSTOMERDATA }
-    });
-    this.dialogRef.close();
+    // this.service.tosterOpen('Loading ...');
+    // this.CUSTOMERDATA.bills = [];
+    // this.router.navigate(['billing'], {
+    //   state: { bill: row, customer: this.CUSTOMERDATA }
+    // });
+    // this.dialogRef.close();
   }
 
   cancel() {
@@ -56,10 +57,10 @@ export class ViewDialogComponent implements OnInit {
 export class SearchComponent {
 
   searchString: string;
-
   displayedColumns: string[] = ['billId', 'name', 'dateOfPurchase', 'mobileNo', 'email'];
   dataSource = [];
   allBills = [];
+  loading = true;
 
   constructor(
     public dialog: MatDialog,
@@ -76,6 +77,7 @@ export class SearchComponent {
         this.dataSource = resp.data;
         this.allBills = resp.data;
         this.dataSource.reverse();
+        this.loading = false;
         this.service.tosterDismiss();
       });
   }
@@ -83,8 +85,6 @@ export class SearchComponent {
   search() {
     const array = [];
     const searchString = this.searchString.toLowerCase();
-
-    // this.allBills = CUSTOMER_DATA;
 
     for (const customer of this.allBills) {
       // Searching fields
@@ -97,7 +97,7 @@ export class SearchComponent {
   }
 
   view(row: { mobileNo: string; }) {
-    this.service.tosterOpen('Loading details...');
+    this.service.tosterOpen('Loading details ...');
     this.rest.get('billing/customer?mobileNo=' + row.mobileNo,
       resp => {
         this.dialog.open(ViewDialogComponent, {

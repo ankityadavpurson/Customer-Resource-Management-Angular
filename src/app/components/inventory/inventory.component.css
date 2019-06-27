@@ -41,3 +41,7 @@ label {
     font-size: 125%;
     margin-top: 5%;
 }
+
+td {
+    width:auto;
+}

@@ -1,9 +1,13 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+* {
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    /* font-family: "Helvetica Neue", sans-serif; */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
 body {
     background: url('assets/image/cool-background.jpg');
-    margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* font-family: "Helvetica Neue", sans-serif; */
 }
 
 .center {
@@ -35,6 +39,12 @@ input[type="text"] {
 .button:hover, button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
+}
+
+td button {
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 0;
 }
 
 .tableDiv {
