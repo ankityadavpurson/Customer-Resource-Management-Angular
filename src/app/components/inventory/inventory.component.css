@@ -34,14 +34,6 @@ label {
     resize: vertical;
 }
 
-.addBtn {
-    text-align: center;
-    margin-top: 0;
-    margin-left: 0;
-    font-size: 125%;
-    margin-top: 5%;
-}
-
 td {
     width:auto;
 }

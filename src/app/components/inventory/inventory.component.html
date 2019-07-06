@@ -2,15 +2,16 @@
   <h2>Inventory Area</h2>
 </div>
 <div>
-  <div [ngClass]="{'addBtn': inventoryData.length === 0}" class="addSearchArea">
+  <div class="addSearchArea">
     <span>
       <button (click)="addNewItem()">Add New Item</button>
     </span>
 
-    <span *ngIf="inventoryData.length !== 0" style="float: right" class="searchInput">
+    <span *ngIf="!loading && INVENTORIES.length !== 0" style="float: right" class="searchInput">
       <mat-form-field>
         <input matInput [(ngModel)]="searchString" (keyup)="search()" placeholder=" Search ...">
       </mat-form-field>
+      <button *ngIf="searchString" (click)="resetSearchString()">x</button>
     </span>
   </div>
 

@@ -96,6 +96,11 @@ export class SearchComponent {
     }
   }
 
+  resetSearchString() {
+    this.searchString = '';
+    this.dataSource = this.allBills;
+  }
+
   view(row: { mobileNo: string; }) {
     this.service.tosterOpen('Loading details ...');
     this.rest.get('billing/customer?mobileNo=' + row.mobileNo,

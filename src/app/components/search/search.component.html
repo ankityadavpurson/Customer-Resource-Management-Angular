@@ -2,9 +2,10 @@
   <h2>Customer Bills</h2>
 </div>
 <div>
-  <div *ngIf="dataSource.length !== 0" class="searchInput">
+  <div *ngIf="!loading && allBills.length !== 0" class="searchInput">
     <mat-form-field>
       <input matInput [(ngModel)]="searchString" (keyup)="search()" placeholder=" Search ...">
+      <button *ngIf="searchString" (click)="resetSearchString()">x</button>
     </mat-form-field>
   </div>
 

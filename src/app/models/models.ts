@@ -73,7 +73,7 @@ export enum ItemIype {
     '',
     'Stationary',
     'Grocery',
-    'Vegitable',
+    'Vegetable',
     'Cold Drinks',
     'T-Shirt'
 }

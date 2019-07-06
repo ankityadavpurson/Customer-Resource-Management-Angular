@@ -1,128 +1,135 @@
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 * {
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-    /* font-family: "Helvetica Neue", sans-serif; */
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  /* font-family: "Helvetica Neue", sans-serif; */
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 body {
-    background: url('assets/image/cool-background.jpg');
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: url("assets/image/cool-background.jpg");
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .center {
-    text-align: center;
-    margin-top: 2.5%;
-    padding-left: 2%;
-    padding-right: 2%;
+  text-align: center;
+  margin-top: 2.5%;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 input[type="text"] {
-    width: 100%;
+  width: 100%;
 }
 
-.button, button, input[type="submit"], input[type="button"] {
-    border: none;
-    font-size: 105%;
-    padding: 3pt 12pt;
-    margin: 5pt;
-    text-align: center;
-    text-decoration: none;
-    border: 1.5pt solid black;
-    border-radius: 3pt;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.5);
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
+.button,
+button,
+input[type="submit"],
+input[type="button"] {
+  border: none;
+  font-size: 105%;
+  padding: 3pt 12pt;
+  margin: 5pt;
+  text-align: center;
+  text-decoration: none;
+  border: 1.5pt solid black;
+  border-radius: 3pt;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 }
 
-.button:hover, button:hover, input[type="submit"]:hover, input[type="button"]:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
 }
 
 td button {
-    padding-left: 4%;
-    padding-right: 4%;
-    padding-bottom: 0;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-bottom: 0;
 }
 
 .tableDiv {
-    padding: 5%;
+  padding: 5%;
 }
 
 table {
-    width: 100%;
-    margin-bottom: 20pt;
-    padding: 10pt;
-    padding-bottom: 0pt;
+  width: 100%;
+  margin-bottom: 20pt;
+  padding: 10pt;
+  padding-bottom: 0pt;
 }
 
-tr th, tr td {
-    width: 5%;
+tr th,
+tr td {
+  width: 5%;
 }
 
 a {
-    text-decoration: none !important;
-    color: black;
+  text-decoration: none !important;
+  color: black;
 }
 
 .error {
-    color: red;
-    font-size: 85%;
-    font-style: italic;
+  color: red;
+  font-size: 85%;
+  font-style: italic;
 }
 
 .primary {
-    color: green;
-    margin-left: 2%;
+  color: green;
+  margin-left: 2%;
 }
 
 .searchInput {
-    text-align: right;
-    margin-right: 5%;
+  text-align: right;
+  margin-right: 5%;
 }
 
 .tableDiv {
-    padding: 3%;
+  padding: 3%;
 }
 
 .table {
-    font-size: 103%;
-    color: black;
+  font-size: 103%;
+  color: black;
 }
 
 .tableHead {
-    color: grey;
-    font-size: 105%;
-    background-color: white;
+  color: grey;
+  font-size: 105%;
+  background-color: white;
 }
 
 .trHover {
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
 }
 
 .trHover:hover {
-    background-color: rgb(228, 228, 228);
-    cursor: pointer;
+  background-color: rgb(228, 228, 228);
+  cursor: pointer;
 }
 
 .noData {
-    text-align: center;
-    font-size: 120%;
-    font-weight: bold;
+  text-align: center;
+  font-size: 120%;
+  font-weight: bold;
 }
 
 .online {
-    background: rgb(0, 109, 18);
+  background: rgb(0, 109, 18);
 }
 
 .offline {
-    background: rgb(177, 4, 4);
+  background: rgb(177, 4, 4);
 }
 
 .mat-dialog-container {
-    background-image: url('./assets/image/dialog-background.jpg');
-    border: 1px solid black;
+  background-image: url("./assets/image/dialog-background.jpg");
+  border: 1px solid black;
 }

@@ -119,7 +119,7 @@ export class InventoryDialogComponent implements OnInit {
 })
 export class InventoryComponent {
 
-  INVENTORIES: any[];
+  INVENTORIES = [];
   displayedColumns: string[] = ['inventoryId', 'name', 'quantity', 'price', 'type', 'expiryDate', 'edit'];
   inventoryData = [];
   searchString: string;
@@ -156,8 +156,15 @@ export class InventoryComponent {
       const type = inventory.type.toLowerCase().match(searchString);
 
       if (id || name || type) { array.push(inventory); }
-      this.inventoryData = array;
+      searchString.length === 0
+        ? this.inventoryData = this.INVENTORIES
+        : this.inventoryData = array;
     }
+  }
+
+  resetSearchString() {
+    this.searchString = '';
+    this.inventoryData = this.INVENTORIES;
   }
 
   editInventory(id: string) {
