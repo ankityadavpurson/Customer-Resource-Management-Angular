@@ -1,35 +1,35 @@
 .container {
-    padding: 10pt;
-    text-align: center;
-    margin-top: 5%;
+  padding: 10pt;
+  text-align: center;
+  margin-top: 5%;
 }
 
 .box {
-    display: inline-flex;
-    border: 2pt solid black;
-    margin: 20pt;
-    padding: 3%;
-    width: 20%;
-    height: 50pt;
-    transition: 0.4s;
-    cursor: pointer;
+  display: inline-flex;
+  border: 2pt solid black;
+  margin: 20pt;
+  padding: 3%;
+  width: 20%;
+  height: 50pt;
+  transition: 0.4s;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 800px) {
-    .box {
-        transition: 0.4s;
-        font-size: 2.2vw;
-    }
+  .box {
+    transition: 0.4s;
+    font-size: 2.2vw;
+  }
 }
 
 @media screen and (max-width: 800px) {
-    .box {
-        transition: 0.4s;
-        font-size: 3.5vw;
-    }
+  .box {
+    transition: 0.4s;
+    font-size: 3.5vw;
+  }
 }
 
 .box:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
 }

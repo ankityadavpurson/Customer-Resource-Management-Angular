@@ -11,7 +11,7 @@
       <mat-form-field>
         <input matInput [(ngModel)]="searchString" (keyup)="search()" placeholder=" Search ...">
       </mat-form-field>
-      <button *ngIf="searchString" (click)="resetSearchString()">x</button>
+      <button style="border: 0" *ngIf="searchString" (click)="resetSearchString()">x</button>
     </span>
   </div>
 

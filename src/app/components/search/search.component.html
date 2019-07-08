@@ -5,8 +5,8 @@
   <div *ngIf="!loading && allBills.length !== 0" class="searchInput">
     <mat-form-field>
       <input matInput [(ngModel)]="searchString" (keyup)="search()" placeholder=" Search ...">
-      <button *ngIf="searchString" (click)="resetSearchString()">x</button>
     </mat-form-field>
+    <button style="border: 0" *ngIf="searchString" (click)="resetSearchString()">x</button>
   </div>
 
   <div class="tableDiv">
