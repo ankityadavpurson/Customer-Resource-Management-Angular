@@ -23,8 +23,8 @@ export class BasicService {
     this.snackBar.dismiss();
   }
 
-  showError = () => {
-    this.tosterOpen('Server Not Responding, Try Again', 'OK', 5000);
+  showError = message => {
+    this.tosterOpen(message || 'Server Not Responding, Try Again', 'OK', 5000);
   }
 
   storage = (typeGetSet: 'local-get' | 'local-set' | 'session-get' | 'session-set', key: string, value?: any) => {

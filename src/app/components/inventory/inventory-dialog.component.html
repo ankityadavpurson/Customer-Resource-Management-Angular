@@ -28,7 +28,7 @@
                     <td class="tableInput">
                         <select formControlName="type">
                             <option value="" selected disabled hidden> {{defaultType}} </option>
-                            <option *ngFor="let key of keys" [value]="itemIype[key]">{{itemIype[key]}}</option>
+                            <option *ngFor="let type of itemIype" [value]="type">{{type}}</option>
                         </select>
                     </td>
                 </tr>

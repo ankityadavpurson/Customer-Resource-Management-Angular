@@ -6,11 +6,8 @@
         <form class="billForm" [formGroup]="billForm">
 
             <mat-form-field class="input">
-                <input matInput type="number"
-                
-                
-                    placeholder="Customer Mobile Number" formControlName="mobileNo" (change)="findUser()"
-                    (keyup)="findUser()">
+                <input matInput type="number" placeholder="Customer Mobile Number" formControlName="mobileNo"
+                    (change)="findUser()" (keyup)="findUser()">
             </mat-form-field>
             <div *ngIf="added && billForm.controls.mobileNo.invalid">
                 <span class="error">*Customer Mobile Number is required</span>

@@ -4,7 +4,7 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RestService } from 'src/app/services/rest.service';
 import { BasicService } from 'src/app/services/basic.service';
-import { ItemIype } from 'src/app/models/models';
+// import { ItemIype } from 'src/app/models/models';
 import { ConfirmComponent } from '../confirm/confirm.component';
 
 export interface Inventory { id: string; }
@@ -19,8 +19,7 @@ export class InventoryDialogComponent implements OnInit {
   Id: any;
   inventoryId: string;
   inventoryForm: FormGroup;
-  keys = ['0'];
-  itemIype = ItemIype;
+  itemIype = [];
   defaultType = 'Select Type ...';
 
   constructor(
@@ -36,7 +35,6 @@ export class InventoryDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.inventoryForm = this.formBuilder.group({
       name: ['', Validators.required],
       quantity: ['', Validators.required],
@@ -46,12 +44,17 @@ export class InventoryDialogComponent implements OnInit {
       expiryDate: ['', Validators.required]
     });
 
-    this.keys = [...Object.keys(this.itemIype).filter(Number)];
-
     this.inventoryId = this.data.id;
 
     if (this.inventoryId) { this.fillItemForm(); }
+    this.getCategories();
+  }
 
+  getCategories() {
+    this.rest.get('inventory/categories', (resp) => {
+      console.log(resp);
+      this.itemIype = resp.data;
+    });
   }
 
   private fillItemForm() {
