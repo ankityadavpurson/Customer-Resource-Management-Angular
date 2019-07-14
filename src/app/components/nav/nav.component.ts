@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy, AfterContentChecked } from '@angular/core
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { BasicService } from '../../services/basic.service';
+import { BasicService } from 'src/app/services/basic.service';
+import { RestService } from 'src/app/services/rest.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,6 +14,7 @@ export class NavComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   constructor(
     private service: BasicService,
+    private rest: RestService,
     private router: Router
   ) { }
 
@@ -27,7 +29,6 @@ export class NavComponent implements OnInit, OnDestroy, AfterContentChecked {
 
     this.logged = this.service.storage('session-get', 'token')
       ? true : false;
-
   }
 
   openMenu() {
@@ -40,10 +41,13 @@ export class NavComponent implements OnInit, OnDestroy, AfterContentChecked {
   }
 
   logout() {
-    this.logged = false;
-    sessionStorage.clear();
-    this.service.changeLogged(this.logged);
-    this.router.navigate(['']);
+    this.rest.post('client/logout', {},
+      resp => {
+        this.logged = false;
+        this.service.changeLogged(this.logged);
+        sessionStorage.clear();
+        this.router.navigate(['']);
+      });
   }
 
   ngAfterContentChecked(): void {

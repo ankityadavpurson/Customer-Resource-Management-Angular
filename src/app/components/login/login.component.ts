@@ -27,9 +27,9 @@ export class ForgotDialogComponent {
   ) { }
 
   getPassword(): void {
-    console.log(this.data);
     this.send = true;
     if (this.data.clientId) {
+      this.service.tosterOpen('Sending mail ...');
       this.rest.post('client/forgot', { clientId: this.data.clientId },
         resp => this.service.tosterOpen(resp.message, '', 3000));
       this.dialogRef.close();
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
 
     this.service.tosterOpen('loading ...', '', 10000);
 
-    this.rest.post('login', this.loginForm.value,
+    this.rest.post('client/login', this.loginForm.value,
       resp => {
         const found = resp.data !== 0 ? true : false;
         if (found) {
