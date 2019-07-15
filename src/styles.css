@@ -47,6 +47,16 @@ input[type="button"]:hover {
   color: white;
 }
 
+.button:disabled,
+button:disabled,
+input[type="submit"]:disabled,
+input[type="button"]:disabled {
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1.5pt dotted black;
+  color: rgb(116, 116, 116);
+}
+
 td button {
   padding-left: 4%;
   padding-right: 4%;

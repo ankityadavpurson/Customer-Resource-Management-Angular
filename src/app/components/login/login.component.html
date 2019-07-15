@@ -26,9 +26,9 @@
 
     <br><br>
 
-    <input type="submit" value="Login" />
-    <input type="button" (click)="forgotPassword()" value="Forgot Password" />
-    <input type="button" (click)="openRegister()" value="Register" />
+    <input type="submit" value="Login" formControlName="loginBtn" />
+    <input type="button" (click)="forgotPassword()" value="Forgot Password" formControlName="forgotBtn" />
+    <input type="button" (click)="openRegister()" value="Register" formControlName="registerBtn" />
 
   </form>
 
@@ -105,8 +105,8 @@
 
     <br><br>
 
-    <input type="button" (click)="registerUser()" value="Register" />
-    <input type="button" (click)="openRegister()" value="Login" />
+    <input type="button" (click)="registerUser()" value="Register" formControlName="registerBtn" />
+    <input type="button" (click)="openRegister()" value="Login" formControlName="loginBtn" />
 
   </form>
 

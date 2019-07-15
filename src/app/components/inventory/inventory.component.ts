@@ -21,6 +21,7 @@ export class InventoryDialogComponent implements OnInit {
   inventoryForm: FormGroup;
   itemIype = [];
   defaultType = 'Select Type ...';
+  addUpdateBtn = true;
 
   constructor(
     public dialogRef: MatDialogRef<InventoryDialogComponent>,
@@ -45,21 +46,27 @@ export class InventoryDialogComponent implements OnInit {
     });
 
     this.inventoryId = this.data.id;
-
-    if (this.inventoryId) { this.fillItemForm(); }
+    if (this.inventoryId) {
+      this.fillItemForm();
+    }
     this.getCategories();
   }
 
-  getCategories() {
-    this.rest.get('inventory/categories', (resp) => {
-      console.log(resp);
-      this.itemIype = resp.data;
-    });
+  async  getCategories() {
+    try {
+      const response = await this.rest.getAsync('inventory/categories');
+      this.itemIype = response.data;
+      this.addUpdateBtn = false;
+    } catch (error) {
+      this.addUpdateBtn = true;
+      this.service.showError(error.error.message);
+    }
   }
 
   private fillItemForm() {
     this.inventoryForm.disable();
     this.rest.get('inventory/item?id=' + this.inventoryId, (resp) => {
+      this.addUpdateBtn = false;
       const { name, quantity, price, discount, type, expiryDate, _id } = resp.data;
       this.Id = _id;
       this.inventoryForm.patchValue({

@@ -13,8 +13,8 @@ export class RestService {
     private service: BasicService
   ) { }
 
-  // private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/'; // Staging baseUrl
-  private readonly baseUrl: string = 'http://localhost:3000/'; // Localhost baseUrl
+  private readonly baseUrl: string = 'https://crmnodeapi.herokuapp.com/'; // Staging baseUrl
+  // private readonly baseUrl: string = 'http://localhost:3000/'; // Localhost baseUrl
 
   private apiGet(apiName: string): Observable<any> {
     return this.http.get(this.baseUrl + apiName, {
@@ -64,4 +64,29 @@ export class RestService {
     }
   }
 
+  getAsync(apiName: string) {
+    return new Promise<IResponse>(
+      (resolve, reject) => {
+        this.apiGet(apiName).subscribe(
+          resp => resolve(resp),
+          error => reject(error)
+        );
+      });
+  }
+
+  postAsync(apiName: string, data: any) {
+    return new Promise<IResponse>(
+      (resolve, reject) => {
+        this.apiPost(apiName, data).subscribe(
+          resp => resolve(resp),
+          error => reject(error)
+        );
+      });
+  }
+}
+
+interface IResponse {
+  responseCode: number;
+  message: string;
+  data?: any;
 }

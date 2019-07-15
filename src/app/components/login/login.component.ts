@@ -72,7 +72,10 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.formBuilder.group({
       clientId: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      loginBtn: ['Login'],
+      forgotBtn: ['Forgot Password'],
+      registerBtn: ['Register']
     });
 
     this.registerForm = this.formBuilder.group({
@@ -82,30 +85,43 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
       shopNo: ['', Validators.required],
-      address: ['', Validators.required]
+      address: ['', Validators.required],
+      loginBtn: ['Login'],
+      registerBtn: ['Register']
     });
 
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) { return; }
 
+    this.loginForm.disable();
     this.service.tosterOpen('loading ...', '', 10000);
+    await this.login({
+      clientId: this.loginForm.value.clientId,
+      password: this.loginForm.value.password
+    });
+  }
 
-    this.rest.post('client/login', this.loginForm.value,
-      resp => {
-        const found = resp.data !== 0 ? true : false;
-        if (found) {
-          this.service.storage('session-set', 'token', resp.data.accessToken);
-          this.service.storage('session-set', 'dbid', resp.data.clientId);
-          this.service.changeLogged(found);
-          this.router.navigate(['home']);
-          this.service.tosterDismiss();
-        } else {
-          this.service.tosterOpen(resp.message, '', 2000);
-        }
-      });
+  private async login(client: Client) {
+    try {
+      const response = await this.rest.postAsync('client/login', client);
+      const { data, message } = response;
+      if (data) {
+        this.service.storage('session-set', 'token', data.accessToken);
+        this.service.storage('session-set', 'dbid', data.clientId);
+        this.service.changeLogged(data);
+        this.router.navigate(['home']);
+        this.service.tosterDismiss();
+      } else {
+        this.loginForm.enable();
+        this.service.tosterOpen(message, '', 2000);
+      }
+    } catch (error) {
+      this.loginForm.enable();
+      this.service.showError(error.error.message);
+    }
   }
 
   forgotPassword() {
@@ -121,18 +137,38 @@ export class LoginComponent implements OnInit {
     this.submitted = false;
   }
 
-  registerUser() {
+  async registerUser() {
     this.submitted = true;
     if (this.registerForm.invalid) { return; }
-
+    this.registerForm.disable();
     this.service.tosterOpen('loading ...', '', 10000);
-
-    this.rest.post('client/add', this.registerForm.value,
-      resp => {
-        this.openRegister();
-        this.service.tosterDismiss();
-      });
-
+    const { clientId, name, mobileNo, email, password, shopNo, address } = this.registerForm.value;
+    await this.registerClient({ clientId, name, mobileNo, email, password, shopNo, address });
   }
 
+  private async registerClient(newClient: NewClient) {
+    try {
+      await this.rest.postAsync('client/add', newClient);
+      this.openRegister();
+      this.service.tosterDismiss();
+    } catch (error) {
+      this.registerForm.enable();
+      this.service.showError(error.error.message);
+    }
+  }
+}
+
+interface Client {
+  clientId: string;
+  password: string;
+}
+
+interface NewClient {
+  clientId: string;
+  name: string;
+  mobileNo: number;
+  email: string;
+  password: string;
+  shopNo: string;
+  address: string;
 }

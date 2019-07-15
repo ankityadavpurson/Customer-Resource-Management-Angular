@@ -24,7 +24,6 @@
                 </tr>
                 <tr>
                     <td class="tableInput"><label>Type</label> </td>
-                    <!-- <td class="tableInput"><input type="text" formControlName="type"></td> -->
                     <td class="tableInput">
                         <select formControlName="type">
                             <option value="" selected disabled hidden> {{defaultType}} </option>
@@ -39,7 +38,7 @@
             </table>
         </form>
     </div>
-    <button style="margin-top: 5%" (click)="itemFunction()">
+    <button [disabled]="addUpdateBtn" style="margin-top: 5%" (click)="itemFunction()">
         {{inventoryId ? 'Update Item' : 'Add Item'}}
     </button>
     <button style="float: right; margin-top: 5%" (click)="cancel()">Cancel</button>

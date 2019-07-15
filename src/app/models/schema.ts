@@ -133,7 +133,7 @@ export const BILLS = (): any[] => {
         });
     });
 
-    console.log(array);
+    // console.log(array);
 
     return array;
 };
