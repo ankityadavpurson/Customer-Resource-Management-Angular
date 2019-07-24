@@ -57,7 +57,7 @@ export class BillingComponent implements OnInit {
       this.billForm.patchValue({
         mobileNo: customer.mobileNo,
         name: customer.name,
-        type: customer.customerType === 'Guest' ? 'guest' : 'primary',
+        type: customer.customerType === 'Guest' ? 'guest' : 'prime',
         email: customer.email,
       });
 

@@ -4,7 +4,6 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RestService } from 'src/app/services/rest.service';
 import { BasicService } from 'src/app/services/basic.service';
-// import { ItemIype } from 'src/app/models/models';
 import { ConfirmComponent } from '../confirm/confirm.component';
 
 export interface Inventory { id: string; }
@@ -92,7 +91,7 @@ export class InventoryDialogComponent implements OnInit {
       this.rest.post('inventory/update', this.inventoryForm.value,
         resp => {
           this.service.tosterOpen(resp.message, '', 2000);
-          if (resp.responseCode === 200) { this.dialogRef.close(); }
+          if (resp.code === 200) { this.dialogRef.close(); }
         });
 
     } else {
@@ -112,7 +111,7 @@ export class InventoryDialogComponent implements OnInit {
       this.rest.post('inventory/add', item,
         resp => {
           this.service.tosterOpen(resp.message, '', 2000);
-          if (resp.responseCode === 201) { this.dialogRef.close(); }
+          if (resp.code === 201) { this.dialogRef.close(); }
         });
     }
   }
