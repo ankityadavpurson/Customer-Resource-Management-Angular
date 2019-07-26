@@ -100,13 +100,17 @@ export class BillingComponent implements OnInit {
         this.price = price;
 
         this.quantity = this.price ? 1 : undefined;
-        this.totalprice = this.quantity * this.price;
+        this.totalprice = this.formateNumber(this.quantity * this.price);
         this.service.tosterDismiss();
       });
   }
 
+  formateNumber(num: number) {
+    return parseFloat((Math.round(num * 100) / 100).toFixed(3));
+  }
+
   setPrice() {
-    this.totalprice = this.quantity * this.price;
+    this.totalprice = this.formateNumber(this.quantity * this.price);
   }
 
   addItemtolist() {

@@ -15,8 +15,8 @@ export class RestService {
     private service: BasicService
   ) { }
 
-  private readonly _BASE_URL: string = 'https://crmnodeapi.herokuapp.com/'; // Staging base url
-  // private readonly _BASE_URL: string = 'http://localhost:3000/'; // Localhost base url
+  // private readonly _BASE_URL: string = 'https://crmnodeapi.herokuapp.com/'; // Staging base url
+  private readonly _BASE_URL: string = 'http://localhost:3000/'; // Localhost base url
 
   // Both get and post request are checking internet status before return
   // HTTP post an observable that is notified when request is finished

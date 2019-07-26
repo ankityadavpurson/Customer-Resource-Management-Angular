@@ -36,12 +36,12 @@ export class ViewDialogComponent implements OnInit {
   }
 
   selectRow(row) {
-    // this.service.tosterOpen('Loading ...');
-    // this.CUSTOMERDATA.bills = [];
-    // this.router.navigate(['billing'], {
-    //   state: { bill: row, customer: this.CUSTOMERDATA }
-    // });
-    // this.dialogRef.close();
+    this.service.tosterOpen('Loading ...');
+    this.CUSTOMERDATA.bills = [];
+    this.router.navigate(['billing'], {
+      state: { bill: row, customer: this.CUSTOMERDATA, disabled: true }
+    });
+    this.dialogRef.close();
   }
 
   cancel() {
